@@ -44,16 +44,18 @@ function createCactus(maxValue, mainDiv) {
     }
 }
 
-function appearTarget(mainRectungle){
+function appearTarget(mainDiv){
 
-    let arm = new ArmTool().createArm(window.innerWidth);
+    let gun = new Gun(mainDiv);
+        gun.setMargins(window.innerWidth);
+        gun.moveGun(document, window.innerWidth);
+
     document.onclick = function(ev){
         AudioHelper.playGunShot();
         DamageHelper.makeDamage(ev.target, ev.target.tag);
     };
 
-    mainRectungle.appendChild(arm);
-    new TargetTool().moveUpTarget(document, arm, window.innerWidth);
+
 
 }
 

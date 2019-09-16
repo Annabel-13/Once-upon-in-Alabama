@@ -1,38 +1,42 @@
-class TargetTool {
 
+class Gun extends Decoration{
 
-    moveUpTarget(document, arm, screenWidht){
-        document.addEventListener("mousemove",onMouseUpdate,false);
-        document.addEventListener("mouseenter",onMouseUpdate,false);
-
-        function onMouseUpdate(ev){
-
-            let offset = ev.pageX - (screenWidht / 2) + 170;
-            arm.style.transform = 'translateX('+offset+'px)';
-
-        }
-
+    constructor(mainDiv){
+        super(mainDiv)
     }
-}
 
-class ArmTool {
-
-    size = 300;
-
-
-    createArm(screenSize){
+    createChildDiv(){
+        let size = 300;
         let arm = document.createElement("div");
-        arm.style.width = this.size + "px";
-        arm.style.height = this.size + "px";
-        arm.style.display = "inlineBlock";
-        arm.style.backgroundImage = "url('images/Arm.png')";
-        arm.style.position = "fixed";
-        arm.style.bottom =  "-90px";
-        arm.style.left = (screenSize / 2) - (this.size / 2) + "px";
-        arm.style.backgroundSize = "contain";
-        arm.style.backgroundPosition = "center";
-        arm.style.backgroundRepeat = "no-repeat";
+            arm.style.width = size + "px";
+            arm.style.height = size + "px";
+            arm.style.display = "inlineBlock";
+            arm.style.backgroundImage = "url('images/Arm.png')";
+            arm.style.position = "fixed";
+            arm.style.backgroundSize = "contain";
+            arm.style.backgroundPosition = "center";
+            arm.style.backgroundRepeat = "no-repeat";
 
         return arm;
     }
+
+    setMargins(screenSize){
+        let size = 300;
+        this.div.style.bottom =  "-90px";
+        this.div.style.left = (screenSize / 2) - (size / 2) + "px";
+    }
+
+    moveGun(document, screenWidht){
+        document.addEventListener("mousemove",onMouseUpdate,false);
+        document.addEventListener("mouseenter",onMouseUpdate,false);
+
+        let currentDiv = this.div;
+
+        function onMouseUpdate(ev){
+            let offset = ev.pageX - (screenWidht / 2) + 170;
+            currentDiv.style.transform = 'translateX('+offset+'px)';
+        }
+    }
+
+
 }
