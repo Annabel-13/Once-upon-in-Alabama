@@ -22,7 +22,7 @@ class Gun extends Decoration{
 
     setMargins(screenSize){
         let size = 300;
-        this.div.style.bottom =  "-90px";
+        this.div.style.bottom =  "-10px";
         this.div.style.left = (screenSize / 2) - (size / 2) + "px";
     }
 
@@ -39,4 +39,9 @@ class Gun extends Decoration{
     }
 
 
+    preparedGun(){
+        document.onclick = function(ev){
+            AudioHelper.playGunShot();
+        };
+    }
 }

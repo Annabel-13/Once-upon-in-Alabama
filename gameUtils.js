@@ -1,6 +1,6 @@
 
 
-class GameScore {
+class GameScore extends Decoration{
 
     height = 200;
     colors = [
@@ -13,13 +13,39 @@ class GameScore {
     borderStyle = "dashed";
 
 
-
-    constructor(text) {
+    constructor(mainDiv, text) {
+        super(mainDiv);
         this.text = text;
+        this.div.style.backgroundColor = this.colors[2];
+        this.div.style.color = this.colors[1];
+        this.div.style.border = this.colors[3];
+        this.div.style.top = (window.innerHeight / 2) - (this.height / 2) + "px" ;
+        this.div.style.right = (window.innerWidth / 2) - this.height + "px";
+        this.div.style.lineHeight = this.height + 'px';
+        this.div.style.borderStyle = this.borderStyle;
+        this.div.style.fontSize = this.height / 2 + "px";
+        this.div.style.borderWidth = this.height / 20 + "px";
+        this.div.innerText = this.text;
+        this.div.style.width = this.height * 2 + "px";
+        this.div.style.height = this.height + "px";
+    }
+
+    setMargins(leftMargin, bottomMargin){
+        this.div.style.bottom = bottomMargin;
+        this.div.style.left = leftMargin;
+    }
+
+    //этот метод создает див и возвращает
+    createChildDiv() {
+        let div = document.createElement('div');
+            div.style.position = "fixed";
+            div.style.textAlign = "center";
+            div.style.fontFamily = "fantasy";
+        return div;
     }
 
 
-     fade(element) {
+    /*  fade(element) {
         var op = 1;  // initial opacity
         var timer = setInterval(function () {
             if (op <= 0.1){
@@ -30,44 +56,13 @@ class GameScore {
             element.style.filter = 'alpha(opacity=' + op * 100 + ")";
             op -= op * 0.1;
         }, 50);
-    }
-
-    //этот метод создает див и возвращает
-    createGameScore(screenWidth, screenHeight) {
-        let div = document.createElement('div');
-            div.style.width = this.height * 2 + "px";
-            div.style.height = this.height + "px";
-            div.style.backgroundColor = this.colors[2];
-            div.style.top = (screenHeight / 2) - (this.height / 2) + "px" ;
-            div.style.right = (screenWidth / 2) - this.height + "px";
-            div.style.position = "fixed";
-            /*div.onclick = function (ev) {
-
-                ev.target.call(fade);
-                 }*/
-            return div;
-    }
-
-
-
-    /*
-       this is function which will decorate
-       us div, set border text, etc...
-     */
-    createText(div){
-        div.innerText = this.text;
-        div.style.color = this.colors[1];
-        div.style.textAlign = "center";
-        div.style.lineHeight = this.height + 'px';
-        div.style.border = this.colors[3];
-        div.style.borderStyle = this.borderStyle;
-        div.style.fontSize = this.height / 2 + "px";
-        div.style.fontFamily = "fantasy";
-        div.style.borderWidth = this.height / 20 + "px";
-    }
+    }*/
 }
 
+
+//getGroundHeight = () => { return window.innerHeight / 10; };
 class Panorama {
+
 
     colors = [
         "#8f48af",
@@ -75,20 +70,18 @@ class Panorama {
     ];
 
 
-    createBackground() {
-        let background = document.createElement('div');
-            background.style.width = window.innerWidth + "px";
-            background.style.height = window.innerHeight + "px";
-            background.style.backgroundColor = this.colors[0];
-            background.style.top = 0;
-            background.style.left = 0;
-            background.style.position = "fixed";
-        return background;
+    createMainDiv() {
+        let mainDiv = document.createElement('div');
+            mainDiv.style.width = window.innerWidth + "px";
+            mainDiv.style.height = window.innerHeight + "px";
+            mainDiv.style.backgroundColor = this.colors[0];
+            mainDiv.style.top = 0;
+            mainDiv.style.left = 0;
+            mainDiv.style.position = "fixed";
+            mainDiv.appendChild(this.createGround());
+        return mainDiv;
     }
 
-    getGroundHeight(){
-        return window.innerHeight / 10
-    }
 
     createGround(){
         let ground = document.createElement('div');
@@ -97,8 +90,7 @@ class Panorama {
             ground.style.backgroundColor = this.colors[1];
             ground.style.bottom = 0;
             ground.style.position = "fixed";
-            return ground;
-
+        return ground;
     }
 }
 

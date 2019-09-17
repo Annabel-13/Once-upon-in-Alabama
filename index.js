@@ -6,18 +6,13 @@ document.addEventListener("DOMContentLoaded", function() {
 document.body.style.cursor = "url('images/smallTarget.png'), auto";
 
 
-
-
-    let fabricPanorama = new Panorama();
-    let mainDiv = fabricPanorama.createBackground();
-    let ground = fabricPanorama.createGround();
-
+    let mainDiv = new Panorama().createMainDiv();
     let moon = new MoonTool(mainDiv);
         moon.setMargins("50px", "50px");
 
-        mainDiv.appendChild(ground);
+    // let scoreTable = new GameScore(mainDiv, "500$");
 
-        createCactus(fabricPanorama.getGroundHeight(), mainDiv);
+        createCactus(window.innerHeight / 10, mainDiv);
         appearTarget(mainDiv);
 
 
@@ -30,7 +25,7 @@ document.body.style.cursor = "url('images/smallTarget.png'), auto";
 
 
 function createCactus(maxValue, mainDiv) {
-
+console.log(maxValue);
     let offset = 10;
 
     for(i = 1; i< 10; i++){
@@ -39,34 +34,17 @@ function createCactus(maxValue, mainDiv) {
         let marginBottom = getRandValue(offset, maxValue - (2 * offset));
         let marginLeft = getRandValue(0, window.innerWidth - size);
 
-        let topCactus = new CactusTool(mainDiv);
-            topCactus.setMargins(marginLeft + "px", marginBottom + "px");
+        let cactus = new Cactus(mainDiv);
+            cactus.setMargins(marginLeft + "px", marginBottom + "px");
     }
 }
 
 function appearTarget(mainDiv){
-
     let gun = new Gun(mainDiv);
         gun.setMargins(window.innerWidth);
         gun.moveGun(document, window.innerWidth);
-
-    document.onclick = function(ev){
-        AudioHelper.playGunShot();
-        DamageHelper.makeDamage(ev.target, ev.target.tag);
-    };
-
-
-
+        gun.preparedGun();
 }
-
-function appeearScoreTable(mainRectungle) {
-
-    let gameScore = new GameScore("500$");
-    let scoreTable = gameScore.createGameScore(window.innerWidth, window.innerHeight);
-        gameScore.createText(scoreTable);
-    mainRectungle.appendChild(scoreTable);
-}
-
 
 function getRandValue(minValue, maxValue) {
    return  Math.floor(Math.random() * maxValue) + minValue;

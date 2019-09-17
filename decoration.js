@@ -64,7 +64,7 @@ class MoonTool extends Decoration {
     }
 }
 
-class CactusTool extends Decoration{
+class Cactus extends Decoration{
 
 
 
@@ -100,7 +100,6 @@ class CactusTool extends Decoration{
     }
 
 }
-
 
 
 
