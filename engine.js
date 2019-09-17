@@ -1,15 +1,20 @@
 
 class Gun extends Decoration{
 
+
+
+    size = 300;
+
+
     constructor(mainDiv){
-        super(mainDiv)
+        super(mainDiv);
+        this.div.style.width = this.size + "px";
+        this.div.style.height = this.size + "px";
     }
 
     createChildDiv(){
-        let size = 300;
+
         let arm = document.createElement("div");
-            arm.style.width = size + "px";
-            arm.style.height = size + "px";
             arm.style.display = "inlineBlock";
             arm.style.backgroundImage = "url('images/Arm.png')";
             arm.style.position = "fixed";
@@ -21,9 +26,8 @@ class Gun extends Decoration{
     }
 
     setMargins(screenSize){
-        let size = 300;
         this.div.style.bottom =  "-10px";
-        this.div.style.left = (screenSize / 2) - (size / 2) + "px";
+        this.div.style.left = (screenSize / 2) - (this.size / 2) + "px";
     }
 
     moveGun(document, screenWidht){
