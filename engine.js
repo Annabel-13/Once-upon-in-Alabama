@@ -2,7 +2,7 @@
 class Gun extends Decoration{
 
 
-
+    bullets = 6;
     size = 300;
 
 
@@ -44,8 +44,14 @@ class Gun extends Decoration{
 
 
     preparedGun(){
+
+        let current = this.bullets;
+
         document.onclick = function(ev){
-            AudioHelper.playGunShot();
+
+            current > 0 ? AudioHelper.playShot() : AudioHelper.playEmptyGun();
+            current = current > 0 ? current -=1 : current;
+
         };
     }
 }

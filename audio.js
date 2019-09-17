@@ -1,11 +1,22 @@
 class AudioHelper {
 
-    static playGunShot(){
-
+    static play(sound){
         let audio = new Audio();
-            audio.src = 'sounds/shot.mp3';
+            audio.src = sound;
             audio.load();
             audio.play();
 
+    }
+
+    static playEmptyGun(){
+        this.play('sounds/gunEmpty.mp3');
+    }
+
+    static playShot(){
+        this.play('sounds/shot.mp3');
+    }
+
+    static playReload(){
+        this.play('sounds/reload.mp3');
     }
 }
