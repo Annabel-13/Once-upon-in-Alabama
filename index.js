@@ -25,7 +25,7 @@ document.body.style.cursor = "url('images/smallTarget.png'), auto";
 
 
 function createCactus(maxValue, mainDiv) {
-console.log(maxValue);
+
     let offset = 10;
 
     for(i = 1; i< 10; i++){
@@ -44,6 +44,7 @@ function appearTarget(mainDiv){
         gun.setMargins(window.innerWidth);
         gun.moveGun(document, window.innerWidth);
         gun.preparedGun();
+        gun.preparedReloadGun();
 }
 
 function getRandValue(minValue, maxValue) {

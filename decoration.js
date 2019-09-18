@@ -15,6 +15,7 @@ class Decoration {
             throw new Error("Decoration element have to had MainDiv!");
         }
         this.div = this.createChildDiv();
+        this.div.tag = Date.now();
             mainDiv.appendChild(this.div);
     }
 
@@ -29,7 +30,7 @@ class Decoration {
 }
 
 //draw moon
-class MoonTool extends Decoration {
+class MoonTool extends Decoration{
 
     constructor(mainDiv){
         super(mainDiv)
@@ -44,7 +45,6 @@ class MoonTool extends Decoration {
     createChildDiv(){
         let size = 200;
         let moon = document.createElement("div");
-            moon.tag = "moon";
             moon.style.width = size + "px";
             moon.style.height =  size + "px";
             moon.style.display = "inlineBlock";
@@ -81,7 +81,6 @@ class Cactus extends Decoration{
         let size = 300;
         let cactusImage = [ "url('images/cact1.png')", "url('images/cact2.png')"];
         let cactus = document.createElement('div');
-            cactus.tag = "cact";
             cactus.style.width = size + "px";
             cactus.style.height = size + "px";
             cactus.style.display = "inlineBlock";
