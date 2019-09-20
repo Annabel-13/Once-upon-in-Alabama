@@ -49,39 +49,25 @@ class Gun extends Decoration{
         document.onclick = function(ev){
 
             current > 0 ? AudioHelper.playShot() : AudioHelper.playEmptyGun();
+            current = current > 0 ? current-=1 : current;
 
-
-            if(current > 0){
-                current -=1;
-                console.log(ev.target.tag);
-            }
         };
     }
+
+
 
     preparedReloadGun(){
 
         let current = this.bullets;
-        let gun = this.div;
 
         document.onkeypress = function(ev){
 
-            console.log(current);
+            console.log(ev.code);
 
-            if(ev.code === "KeyR" && current < 1){
+            if(ev.code === "KeyR"){
 
                 AudioHelper.playReload();
-
-                //
-                // setInterval(function () {
-                //     gun.style.transform = 'translateY('+gun.style.height+')';
-                // }, 20);
-                // gun.style.transform = 'translateY('+gun.style.height+')'; //show gun down animation && current === 0
-              /*  current < 0 ? AudioHelper.playReload() : false;//enter reload song// fill gun by bullets*/
-
-
-                // let reload = delay(function, 3000);
-             /*   reload("gun");//show up gun animation (delay)*/
-               /* gun.style.transform = 'translateY('+-gun.style.height+')';*/
+                current === 6;
             }
         };
     }
@@ -105,5 +91,5 @@ class Damage extends Decoration{
 
     }
 }
-аоаоплпл
+
 
