@@ -1,36 +1,7 @@
 
 
-/*
-    this is base decoration classe
-    - construct will append each child to panorama
-    - create child will create child div
-    - setMargin will set position of div
- */
-class Decoration {
-
-    div;
-
-    constructor(mainDiv){
-        if(mainDiv == null){
-            throw new Error("Decoration element have to had MainDiv!");
-        }
-        this.div = this.createChildDiv();
-        this.div.tag = Date.now();
-            mainDiv.appendChild(this.div);
-    }
-
-    createChildDiv(){
-        throw new Error("ChildDecoration should overwrite 'createChildDiv' ");
-    }
-
-    setMargins(topMargin, rightMargin){
-        throw new Error("ChildDecoration should overwrite 'setMargins' ");
-    }
-
-}
-
 //draw moon
-class MoonTool extends Decoration{
+class MoonTool extends BaseDamagable{
 
     constructor(mainDiv){
         super(mainDiv)
@@ -44,11 +15,13 @@ class MoonTool extends Decoration{
 
     createChildDiv(){
         let size = 200;
+        let image = ["url('images/Moon.png')", "url('images/Half-Moon-PNG-Pic.png')"];
         let moon = document.createElement("div");
+            moon.id = Date.now();
             moon.style.width = size + "px";
             moon.style.height =  size + "px";
             moon.style.display = "inlineBlock";
-            moon.style.backgroundImage = "url('images/Moon.png')";
+            moon.style.backgroundImage = image[0];
             moon.style.position = "fixed";
 
             moon.style.backgroundSize = "contain";
@@ -59,12 +32,13 @@ class MoonTool extends Decoration{
     }
 
 
-    destroyedHalfMoon(image) {
-        this.div.style.backgroundImage = image
+    destroyedDiv(image) {
+        this.div.style.backgroundImage = image[1];
+
     }
 }
 
-class Cactus extends Decoration{
+class Cactus extends BaseDamagable{
 
 
 
@@ -79,12 +53,13 @@ class Cactus extends Decoration{
 
     createChildDiv(){
         let size = 300;
-        let cactusImage = [ "url('images/cact1.png')", "url('images/cact2.png')"];
+        let image = [ "url('images/cact1.png')", "url('images/cact2.png')"];
         let cactus = document.createElement('div');
+            cactus.id = Date.now();
             cactus.style.width = size + "px";
             cactus.style.height = size + "px";
             cactus.style.display = "inlineBlock";
-            cactus.style.backgroundImage = cactusImage[0];
+            cactus.style.backgroundImage = image[0];
             cactus.style.position = "fixed";
 
             cactus.style.backgroundSize = "contain";
@@ -94,8 +69,9 @@ class Cactus extends Decoration{
         return cactus;
     }
 
-    destroyedHalfCactus(image) {
-        this.div.style.backgroundImage = image
+    destroyedDiv(image) {
+        this.div.style.backgroundImage = image[1];
+
     }
 
 }

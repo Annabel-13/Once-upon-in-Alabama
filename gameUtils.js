@@ -1,6 +1,6 @@
 
 
-class GameScore extends Decoration{
+class GameScore extends BaseDecoration{
 
     height = 200;
     colors = [
@@ -28,12 +28,14 @@ class GameScore extends Decoration{
         this.div.innerText = this.text;
         this.div.style.width = this.height * 2 + "px";
         this.div.style.height = this.height + "px";
+        this.div.style.opacity = 0;
     }
 
     setMargins(leftMargin, bottomMargin){
         this.div.style.bottom = bottomMargin;
         this.div.style.left = leftMargin;
     }
+
 
     //этот метод создает див и возвращает
     createChildDiv() {
@@ -44,19 +46,46 @@ class GameScore extends Decoration{
         return div;
     }
 
+    //здесь мы должны создать табличку, она выплывет на середину и заиграет музыка
 
-    /*  fade(element) {
-        var op = 1;  // initial opacity
-        var timer = setInterval(function () {
-            if (op <= 0.1){
-                clearInterval(timer);
-                element.style.display = 'none';
+    showTable(mainDiv){
+
+        document.onkeypress = (ev) => {
+
+            if (ev.code === "KeyS") {
+                /*this.gunDisappearAnimation(this.div);
+                AudioHelper.dikiyZapad();*/
+                this.annFadeIn();
             }
-            element.style.opacity = op;
-            element.style.filter = 'alpha(opacity=' + op * 100 + ")";
-            op -= op * 0.1;
-        }, 50);
-    }*/
+        }
+    }
+
+    annFadeIn(){
+
+        let currentOpacityValue = 0;
+        let currentDiv = this.div;
+
+        let id = setInterval(function () {
+            currentDiv.style.opacity = currentOpacityValue / 10;
+            currentOpacityValue < 10 ? currentOpacityValue +=1: clearInterval(id);
+        }, 150);
+
+    };
+
+
+    annFadeOut(){
+
+        let currentOpacityValue = 10;
+        let currentDiv = this.div;
+
+        let id = setInterval(function () {
+            currentDiv.style.opacity = currentOpacityValue / 10;
+            currentOpacityValue > 0 ? currentOpacityValue -=1: clearInterval(id);
+        }, 150);
+
+    };
+
+
 }
 
 

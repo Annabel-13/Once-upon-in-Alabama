@@ -19,4 +19,8 @@ class AudioHelper {
     static playReload(){
         this.play('sounds/reload.mp3');
     }
+
+    static playScore(){
+        this.play('sounds/dikiyZapad.mp3');
+    }
 }

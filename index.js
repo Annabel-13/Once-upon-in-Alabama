@@ -10,17 +10,14 @@ document.body.style.cursor = "url('images/smallTarget.png'), auto";
     let moon = new MoonTool(mainDiv);
         moon.setMargins("50px", "50px");
 
-    // let scoreTable = new GameScore(mainDiv, "500$");
 
         createCactus(window.innerHeight / 10, mainDiv);
         appearTarget(mainDiv);
-
+        new GameScore(mainDiv, "500").showTable();
 
     document.body.append(mainDiv);
 
 });
-
-
 
 
 
@@ -44,8 +41,10 @@ function appearTarget(mainDiv){
         gun.setMargins(window.innerWidth);
         gun.moveGun(document, window.innerWidth);
         gun.preparedGun();
-        gun.preparedReloadGun();
+        gun.preparedReloadGun(mainDiv);
 }
+
+
 
 function getRandValue(minValue, maxValue) {
    return  Math.floor(Math.random() * maxValue) + minValue;
