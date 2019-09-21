@@ -119,4 +119,40 @@ class Panorama {
     }
 }
 
+class HealthScore extends BaseDecoration{
+
+    height = 50;
+    maxHealthValue = 100;
+
+    constructor(mainDiv) {
+        super(mainDiv);
+        this.div.style.width = 300 + "px";
+        this.div.style.height =  this.height + "px";
+        this.div.style.fontSize = this.height / 2 + "px";
+        this.div.style.lineHeight = this.height + 'px';
+    }
+
+    createChildDiv(){
+        let healthScore = document.createElement('div');
+            healthScore.style.bottom = window.innerHeight / 10 + 10 + "px";
+            healthScore.style.right = 10 + "px";
+            healthScore.style.position = "fixed";
+            healthScore.style.color = "#0ba754";
+            healthScore.style.borderStyle = "groove";
+            healthScore.style.borderWidth = 10 + "px";
+            healthScore.style.borderColor = "#f83837";
+            healthScore.innerText = "100%";
+            healthScore.style.textAlign = "center";
+            healthScore.style.fontFamily = "fantasy";
+            healthScore.style.borderRadius = "33px";
+        return healthScore;
+
+    }
+
+    setHealthValue(currentHealthValue){
+        let personHealthValue = (this.maxHealthValue - currentHealthValue);
+        this.div.innerText = personHealthValue + "%";
+        this.div.style.color = personHealthValue > 50 ? "#0ba754": personHealthValue > 33 ? "#f8ef48" : "#f83837";
+    }
+}
 

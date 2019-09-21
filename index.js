@@ -17,8 +17,24 @@ document.body.style.cursor = "url('images/smallTarget.png'), auto";
         score.setMargins(0 + "px", (window.innerHeight - scoreHeight) + "px");
         score.showTable();
 
-        createCactus(window.innerHeight / 10, mainDiv, dictionary);
+        let healthScore = new HealthScore(mainDiv);
+
+        //createCactus(window.innerHeight / 10, mainDiv, dictionary);
         appearTarget(mainDiv, dictionary, score);
+
+
+        let currentValue = 0;
+        let id = setInterval(function () {
+
+            if(currentValue < 100){
+                currentValue += 1;
+                healthScore.setHealthValue(currentValue);
+            }else {
+                clearInterval(id);
+            }
+        }, 200);
+
+
 
     document.body.append(mainDiv);
 
