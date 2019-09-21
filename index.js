@@ -13,7 +13,7 @@ document.body.style.cursor = "url('images/smallTarget.png'), auto";
 
         createCactus(window.innerHeight / 10, mainDiv);
         appearTarget(mainDiv);
-        new GameScore(mainDiv, "500").showTable();
+        //new GameScore(mainDiv, "500").showTable();
 
     document.body.append(mainDiv);
 
@@ -39,9 +39,9 @@ function createCactus(maxValue, mainDiv) {
 function appearTarget(mainDiv){
     let gun = new Gun(mainDiv);
         gun.setMargins(window.innerWidth);
-        gun.moveGun(document, window.innerWidth);
+        gun.moveGun(document);
         gun.preparedGun();
-        gun.preparedReloadGun(mainDiv);
+        gun.preparedReloadGun();
 }
 
 

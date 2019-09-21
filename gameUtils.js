@@ -48,17 +48,17 @@ class GameScore extends BaseDecoration{
 
     //здесь мы должны создать табличку, она выплывет на середину и заиграет музыка
 
-    showTable(mainDiv){
+   /* showTable(mainDiv){
 
         document.onkeypress = (ev) => {
 
             if (ev.code === "KeyS") {
-                /*this.gunDisappearAnimation(this.div);
-                AudioHelper.dikiyZapad();*/
+                /!*this.gunDisappearAnimation(this.div);
+                AudioHelper.dikiyZapad();*!/
                 this.annFadeIn();
             }
         }
-    }
+    }*/
 
     annFadeIn(){
 
