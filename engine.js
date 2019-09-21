@@ -4,7 +4,6 @@ class Gun extends BaseDecoration {
 
     bullets = 6;
     size = 300;
-    isShowed = false;
 
     constructor(mainDiv) {
         super(mainDiv);
@@ -30,16 +29,14 @@ class Gun extends BaseDecoration {
         this.div.style.left = (screenSize / 2) - (this.size / 2) + "px";
     }
 
-    moveGun(document, screenWidht) {
+    moveGun(document) {
+
+        let onMouseUpdate = (ev) => {
+            this.div.style.left = ev.pageX + "px";
+        };
+
         document.addEventListener("mousemove", onMouseUpdate, false);
         document.addEventListener("mouseenter", onMouseUpdate, false);
-
-        let currentDiv = this.div;
-
-        function onMouseUpdate(ev) {
-            let offset = ev.pageX - (screenWidht / 2) + 170;
-            currentDiv.style.transform = 'translateX(' + offset + 'px)';
-        }
     };
 
     preparedGun() {
@@ -51,35 +48,53 @@ class Gun extends BaseDecoration {
         };
     }
 
-    preparedReloadGun(mainDiv){
-
-        //let scoreTable;
+    preparedReloadGun(){
 
         document.onkeypress = (ev) => {
 
                 if (ev.code === "KeyR") {
-                    this.gunDisappearAnimation(this.div);
-                    AudioHelper.playReload();
-                    //this.bullets += 1;
+                    this.gunDisappearAnimation(this.size, this.div,this.bullets);
+                    setTimeout(()=> {
+                        this.bullets = 6;
+                        this.gunAppearAnimation(this.size, this.div);
+                    }, 5000);
                 }
         }
     }
-//пистолет должен исчезать и только тогда перезаряжаться
 
-   gunDisappearAnimation(gun){
+   gunDisappearAnimation(size,div,bullets){
 
+        if(bullets < 1){
 
-        let current = this.bullets;
+                let currentSize = 0;
 
-       let emptyGun = setInterval(function () {
-           if (current === 0) {
-               clearInterval(emptyGun);
-           } else {
-               gun.style.transform = 'translateY(' + gun.style.height +1 + 'px)';
-           }
-       }, 50);
+                let id = setInterval(function () {
+                    if(currentSize > -size){
+                        currentSize -= 1;
+                        div.style.bottom = currentSize + "px";
+                    }else {
+                        AudioHelper.playReload();
+                        clearInterval(id);
+                    }
+                }, 5);
+        }
+    }
 
-}}
+    gunAppearAnimation(size,div){
+
+            let currentSize = -size;
+
+            let id = setInterval(function () {
+                if(currentSize < 0){
+                    currentSize += 1;
+                    div.style.bottom = currentSize + "px";
+                }else {
+                    clearInterval(id);
+                }
+            }, 5);
+
+    }
+}
 
 
 
