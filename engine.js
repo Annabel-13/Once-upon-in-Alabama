@@ -39,12 +39,26 @@ class Gun extends BaseDecoration {
         document.addEventListener("mouseenter", onMouseUpdate, false);
     };
 
-    preparedGun() {
+    preparedGun(dictionary,score) {
 
-        document.onclick = () => {
+        document.onclick = (ev) => {
 
-            this.bullets > 0 ? AudioHelper.playShot() : AudioHelper.playEmptyGun();
-            this.bullets = this.bullets > 0 ? this.bullets -= 1 : this.bullets;
+            if(this.bullets > 0){
+                let key = ev.target.tag;
+
+                score.setText(key);
+
+                if(key !== undefined){
+                    let value = dictionary[key];
+                        value.destroyedDiv();
+                }
+
+                AudioHelper.playShot();
+                this.bullets -= 1
+            }else{
+                AudioHelper.playEmptyGun();
+            }
+
         };
     }
 
@@ -76,7 +90,7 @@ class Gun extends BaseDecoration {
                         AudioHelper.playReload();
                         clearInterval(id);
                     }
-                }, 5);
+                }, 3);
         }
     }
 

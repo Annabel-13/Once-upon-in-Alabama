@@ -16,7 +16,6 @@ class BaseDecoration {
             throw new Error("BaseDecoration element have to had MainDiv!");
         }
         this.div = this.createChildDiv();
-        this.div.tag = Date.now();
         mainDiv.appendChild(this.div);
     }
 
@@ -33,8 +32,15 @@ class BaseDecoration {
 
 class BaseDamagable extends BaseDecoration{
 
-    constructor(mainDiv){
-        super(mainDiv)
+    constructor(mainDiv, dictionary,tag){
+        super(mainDiv);
+
+        if(tag === undefined){
+            throw new Error("Child need tag!");
+        }
+
+        this.div.tag = tag;
+        dictionary[this.div.tag] = this;
     }
 
 

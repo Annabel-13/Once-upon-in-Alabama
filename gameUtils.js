@@ -19,8 +19,8 @@ class GameScore extends BaseDecoration{
         this.div.style.backgroundColor = this.colors[2];
         this.div.style.color = this.colors[1];
         this.div.style.border = this.colors[3];
-        this.div.style.top = (window.innerHeight / 2) - (this.height / 2) + "px" ;
-        this.div.style.right = (window.innerWidth / 2) - this.height + "px";
+        this.div.style.bottom = (window.innerHeight / 2) - (this.height / 2) + "px" ;
+        this.div.style.left = (window.innerWidth / 2) - this.height + "px";
         this.div.style.lineHeight = this.height + 'px';
         this.div.style.borderStyle = this.borderStyle;
         this.div.style.fontSize = this.height / 2 + "px";
@@ -48,17 +48,9 @@ class GameScore extends BaseDecoration{
 
     //здесь мы должны создать табличку, она выплывет на середину и заиграет музыка
 
-   /* showTable(mainDiv){
-
-        document.onkeypress = (ev) => {
-
-            if (ev.code === "KeyS") {
-                /!*this.gunDisappearAnimation(this.div);
-                AudioHelper.dikiyZapad();*!/
-                this.annFadeIn();
-            }
-        }
-    }*/
+    showTable(){
+        this.annFadeIn();
+    }
 
     annFadeIn(){
 
@@ -68,7 +60,7 @@ class GameScore extends BaseDecoration{
         let id = setInterval(function () {
             currentDiv.style.opacity = currentOpacityValue / 10;
             currentOpacityValue < 10 ? currentOpacityValue +=1: clearInterval(id);
-        }, 150);
+        }, 80);
 
     };
 
@@ -81,9 +73,13 @@ class GameScore extends BaseDecoration{
         let id = setInterval(function () {
             currentDiv.style.opacity = currentOpacityValue / 10;
             currentOpacityValue > 0 ? currentOpacityValue -=1: clearInterval(id);
-        }, 150);
+        }, 80);
 
     };
+
+    setText(text){
+        this.div.innerText = text;
+    }
 
 
 }
