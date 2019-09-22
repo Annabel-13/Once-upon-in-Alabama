@@ -19,7 +19,9 @@ document.body.style.cursor = "url('images/smallTarget.png'), auto";
 
         let healthScore = new HealthScore(mainDiv);
 
-        //createCactus(window.innerHeight / 10, mainDiv, dictionary);
+
+
+        // createCactus(window.innerHeight / 10, mainDiv, dictionary);
         appearTarget(mainDiv, dictionary, score);
 
 
@@ -44,17 +46,23 @@ document.body.style.cursor = "url('images/smallTarget.png'), auto";
 
 function createCactus(maxValue, mainDiv, dictionary) {
 
-    let offset = 10;
-
-    for(i = 1; i< 5; i++){
-
-        let size = 300;
+        let offset = 10;
+        let size = 200;
         let marginBottom = getRandValue(offset, maxValue - (2 * offset));
-        let marginLeft = getRandValue(0, window.innerWidth - size);
 
-        let cactus = new Cactus(mainDiv, dictionary, "cactus"+i);
-            cactus.setMargins(marginLeft + "px", marginBottom + "px");
-    }
+        let start = 0;
+        let end = 0;
+
+        do {
+            start = getRandValue(end, end + size);
+            end = start + size;
+
+            let cactus = new Cactus(mainDiv, dictionary, "cactus"+start);
+                cactus.setMargins(start + "px", marginBottom + "px");
+        } while (end < window.innerWidth);
+
+
+
 }
 
 function appearTarget(mainDiv, dictionary,score){
@@ -64,7 +72,6 @@ function appearTarget(mainDiv, dictionary,score){
         gun.preparedGun(dictionary,score);
         gun.preparedReloadGun();
 }
-
 
 
 function getRandValue(minValue, maxValue) {

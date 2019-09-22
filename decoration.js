@@ -38,7 +38,7 @@ class Moon extends BaseDamagable{
 
 class Cactus extends BaseDamagable{
 
-    image = [ "url('images/cact1.png')", "url('images/cact1Broken.png')"];
+    image = [ "url('images/cact3.png')", "url('images/cact2Broken.png')"];
 
     constructor(mainDiv, dictionary,tag){
         super(mainDiv, dictionary,tag);
@@ -53,15 +53,17 @@ class Cactus extends BaseDamagable{
     }
 
     createChildDiv(){
-        let size = 300;
-        let cactus = document.createElement('div');
-            cactus.style.width = size + "px";
-            cactus.style.height = size + "px";
-            cactus.style.display = "inlineBlock";
+        let width = 200;
+        let height = 300;
+            let cactus = document.createElement('div');
+            cactus.style.width = width + "px";
+            cactus.style.height = height + "px";
+            cactus.style.display = "inline-block";
             cactus.style.position = "fixed";
-            cactus.style.backgroundSize = "contain";
+            cactus.style.backgroundSize = "auto";
             cactus.style.backgroundPosition = "bottom";
             cactus.style.backgroundRepeat = "no-repeat";
+            //cactus.style.cssFloat = "left";
 
         return cactus;
     }
