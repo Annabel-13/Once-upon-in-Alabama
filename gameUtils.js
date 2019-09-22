@@ -122,14 +122,46 @@ class Panorama {
 class HealthScore extends BaseDecoration{
 
     height = 50;
+    width = 300;
     maxHealthValue = 100;
+    textDiv;
+    contentDiv;
 
     constructor(mainDiv) {
         super(mainDiv);
-        this.div.style.width = 300 + "px";
+        this.div.style.width = this.width + "px";
         this.div.style.height =  this.height + "px";
         this.div.style.fontSize = this.height / 2 + "px";
         this.div.style.lineHeight = this.height + 'px';
+        this.textDiv = this.createTextDiv();
+        this.contentDiv = this.createContentDiv();
+        this.div.append(this.contentDiv);
+        this.div.append(this.textDiv);
+    }
+
+     createContentDiv(){
+         let contentDiv = document.createElement('div');
+             contentDiv.style.bottom = window.innerHeight / 10 + 20 + "px";
+             contentDiv.style.width = this.div.style.width;
+             contentDiv.style.height = this.div.style.height;
+             contentDiv.style.position = "fixed";
+             contentDiv.style.backgroundColor = "#f8ef48";
+             contentDiv.style.opacity = 0.6;
+             contentDiv.style.borderRadius = "33px";
+        return contentDiv;
+
+    }
+
+    createTextDiv(){
+        let textDiv = document.createElement('div');
+            textDiv.style.bottom = window.innerHeight / 10 + 20 + "px";
+            textDiv.style.width = this.div.style.width;
+            textDiv.style.height = this.div.style.height;
+            textDiv.style.position = "fixed";
+            textDiv.innerText = "100%";
+            textDiv.style.borderRadius = "33px";
+        return textDiv;
+
     }
 
     createChildDiv(){
@@ -137,11 +169,9 @@ class HealthScore extends BaseDecoration{
             healthScore.style.bottom = window.innerHeight / 10 + 10 + "px";
             healthScore.style.right = 10 + "px";
             healthScore.style.position = "fixed";
-            healthScore.style.color = "#0ba754";
             healthScore.style.borderStyle = "groove";
             healthScore.style.borderWidth = 10 + "px";
             healthScore.style.borderColor = "#f83837";
-            healthScore.innerText = "100%";
             healthScore.style.textAlign = "center";
             healthScore.style.fontFamily = "fantasy";
             healthScore.style.borderRadius = "33px";
@@ -149,10 +179,15 @@ class HealthScore extends BaseDecoration{
 
     }
 
+
+
     setHealthValue(currentHealthValue){
         let personHealthValue = (this.maxHealthValue - currentHealthValue);
-        this.div.innerText = personHealthValue + "%";
-        this.div.style.color = personHealthValue > 50 ? "#0ba754": personHealthValue > 33 ? "#f8ef48" : "#f83837";
+        this.textDiv.innerText = personHealthValue + "%";
+        this.contentDiv.style.width = this.width - currentHealthValue * (this.width / this.maxHealthValue) + "px";
+        this.contentDiv.style.backgroundColor = personHealthValue > 50 ? "#0ba754": personHealthValue > 33 ? "#f8ef48" : "#f83837";
     }
+
+
 }
 
