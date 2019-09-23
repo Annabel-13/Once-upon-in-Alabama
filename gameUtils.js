@@ -42,7 +42,7 @@ class GameScore extends BaseDecoration{
         let div = document.createElement('div');
             div.style.position = "fixed";
             div.style.textAlign = "center";
-            div.style.fontFamily = "fantasy";
+            div.style.fontFamily = "ryo";
         return div;
     }
 

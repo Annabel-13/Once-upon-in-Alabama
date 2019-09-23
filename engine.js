@@ -84,13 +84,13 @@ class Gun extends BaseDecoration {
 
                 let id = setInterval(function () {
                     if(currentSize > -size){
-                        currentSize -= 1;
+                        currentSize -= 5;
                         div.style.bottom = currentSize + "px";
                     }else {
                         AudioHelper.playReload();
                         clearInterval(id);
                     }
-                }, 3);
+                }, 5);
         }
     }
 
