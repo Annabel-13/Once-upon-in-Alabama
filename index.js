@@ -20,6 +20,10 @@ document.body.style.cursor = "url('images/smallTarget.png'), auto";
         let healthScore = new HealthScore(mainDiv);
 
 
+        let enemies = new DrunkJoy(mainDiv,dictionary,"drunker");
+
+
+
 
         // createCactus(window.innerHeight / 10, mainDiv, dictionary);
         appearTarget(mainDiv, dictionary, score);
