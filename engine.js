@@ -4,6 +4,9 @@ class Gun extends BaseDecoration {
 
     bullets = 6;
     size = 300;
+    isLoading = false;
+
+
 
     constructor(mainDiv) {
         super(mainDiv);
@@ -14,12 +17,12 @@ class Gun extends BaseDecoration {
     createChildDiv() {
 
         let arm = document.createElement("div");
-        arm.style.display = "inlineBlock";
-        arm.style.backgroundImage = "url('images/Arm.png')";
-        arm.style.position = "fixed";
-        arm.style.backgroundSize = "contain";
-        arm.style.backgroundPosition = "center";
-        arm.style.backgroundRepeat = "no-repeat";
+            arm.style.display = "inlineBlock";
+            arm.style.backgroundImage = "url('images/Arm.png')";
+            arm.style.position = "fixed";
+            arm.style.backgroundSize = "contain";
+            arm.style.backgroundPosition = "center";
+            arm.style.backgroundRepeat = "no-repeat";
 
         return arm;
     }
@@ -46,11 +49,10 @@ class Gun extends BaseDecoration {
             if(this.bullets > 0){
                 let key = ev.target.tag;
 
-                score.setText(key);
+                     score.setText(key);
 
                 if(key !== undefined){
-                    let value = dictionary[key];
-                        value.destroyedDiv();
+                   dictionary[key].destroyedDiv();
                 }
 
                 AudioHelper.playShot();
@@ -66,11 +68,13 @@ class Gun extends BaseDecoration {
 
         document.onkeypress = (ev) => {
 
-                if (ev.code === "KeyR") {
+                if (ev.code === "KeyR" && this.isLoading === false) {
+                    this.isLoading = true;
                     this.gunDisappearAnimation(this.size, this.div,this.bullets);
                     setTimeout(()=> {
                         this.bullets = 6;
-                        this.gunAppearAnimation(this.size, this.div);
+                        this.gunAppearAnimation(this.size, this.div, this.isLoading);
+                        this.isLoading = false;
                     }, 5000);
                 }
         }
@@ -100,7 +104,7 @@ class Gun extends BaseDecoration {
 
             let id = setInterval(function () {
                 if(currentSize < 0){
-                    currentSize += 1;
+                    currentSize += 5;
                     div.style.bottom = currentSize + "px";
                 }else {
                     clearInterval(id);

@@ -173,7 +173,7 @@ class HealthScore extends BaseDecoration{
             healthScore.style.borderWidth = 10 + "px";
             healthScore.style.borderColor = "#f83837";
             healthScore.style.textAlign = "center";
-            healthScore.style.fontFamily = "fantasy";
+            healthScore.style.fontFamily = "ryo";
             healthScore.style.borderRadius = "33px";
         return healthScore;
 
