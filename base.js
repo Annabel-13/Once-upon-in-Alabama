@@ -112,16 +112,15 @@ class BaseEnemy extends BaseDamagable{
 
             let id = setInterval(() => {
 
+                if(shootingCount > 0){
+                    AudioHelper.playShot();
+                    shootingCount -= 1;
+                    } else{
+                    AudioHelper.playEmptyGun();
+                    clearInterval(id);
+                }
 
-            if(shootingCount > 0){
-                AudioHelper.playShot();
-                shootingCount -= 1;
-                } else{
-                AudioHelper.playEmptyGun();
-                clearInterval(id);
-            }
-
-        }, 200);
+            }, 200);
 
            /* AudioHelper.playShot();
             this.bullets -= shootingCount*/
