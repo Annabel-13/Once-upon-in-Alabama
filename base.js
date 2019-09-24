@@ -115,7 +115,7 @@ class BaseEnemy extends BaseDamagable{
                 if(shootingCount > 0){
                     AudioHelper.playShot();
                     shootingCount -= 1;
-                    } else{
+                }else{
                     AudioHelper.playEmptyGun();
                     clearInterval(id);
                 }
