@@ -43,8 +43,6 @@ class Cactus extends BaseDamagable{
     constructor(mainDiv, dictionary,tag){
         super(mainDiv, dictionary,tag);
         this.div.style.backgroundImage = this.image[0];
-        this.div.style.borderStyle = "dashed";
-        this.div.style.borderWidth = 10 + "px";
     }
 
     setMargins(leftMargin, bottomMargin){
