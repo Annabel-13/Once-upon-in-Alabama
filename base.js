@@ -208,7 +208,7 @@ class BaseEnemy extends BaseDamagable{
         throw new Error("ChildClass should overwrite 'onDamage' ");
     }
 
-    onDie(){
+    onDie() {
 //        this.div.style.visibility = "hidden"
         throw new Error("ChildClass should overwrite 'onDie' ");
     }
