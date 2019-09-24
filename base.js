@@ -147,8 +147,6 @@ class BaseEnemy extends BaseDamagable{
                 let allowRight = (this.positionX  + this.size + this.path)  < window.innerWidth;
                 let allowLeft = (this.positionX - this.path) > 0;
 
-
-
                 if(direction === 0 && !allowRight){
                     direction = 1
                 } else if(direction === 1 && !allowLeft){
@@ -174,13 +172,11 @@ class BaseEnemy extends BaseDamagable{
     }
 
     moveRight(){
-
             this.positionX += this.path;
             this.div.style.left = this.positionX + "px";
     }
 
     moveLeft(){
-
             this.positionX -= this.path;
             this.div.style.left = this.positionX + "px";
     }
@@ -200,7 +196,7 @@ class BaseEnemy extends BaseDamagable{
     }
 
     onDie() {
-//        this.div.style.visibility = "hidden"
+
         throw new Error("ChildClass should overwrite 'onDie' ");
     }
 }
