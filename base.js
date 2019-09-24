@@ -103,7 +103,6 @@ class BaseEnemy extends BaseDamagable{
 
     makeShoot(){
 
-      /*  if(this.bullets > 0){*/
             let shootingCount = getRandValue(1, this.bullets);
 
             let id = setInterval(() => {
@@ -115,17 +114,7 @@ class BaseEnemy extends BaseDamagable{
                     AudioHelper.playEmptyGun();
                     clearInterval(id);
                 }
-
             }, 200);
-
-
-           /* AudioHelper.playShot();
-            this.bullets -= shootingCount*/
-
-
-       /* }else{
-            AudioHelper.playEmptyGun();
-      }*/
     }
 
     makeRun(){
@@ -134,7 +123,7 @@ class BaseEnemy extends BaseDamagable{
         if(!this.isFinishedCycle) return;
 
         this.isFinishedCycle = false;
-        let distance = 5000;
+        let distance = getRandValue(window.innerWidth / 5, window.innerWidth / 2);
         let direction = getRandValue(0, 1);
         let waitTime = getRandValue(50, 100);
 
@@ -196,7 +185,6 @@ class BaseEnemy extends BaseDamagable{
     }
 
     onDie() {
-
         throw new Error("ChildClass should overwrite 'onDie' ");
     }
 }
