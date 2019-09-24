@@ -80,19 +80,15 @@ class BaseEnemy extends BaseDamagable{
 
     createChildDiv() {
         let baseEnemy = document.createElement('div');
-        baseEnemy.style.backgroundColor = "yellow";
-        baseEnemy.style.bottom = 20 + "px";
-        baseEnemy.style.position = "fixed";
+            baseEnemy.style.backgroundColor = "yellow";
+            baseEnemy.style.bottom = 20 + "px";
+            baseEnemy.style.position = "fixed";
         return baseEnemy;
     }
 
-    setMargins(screenSize) {
-        this.div.style.bottom = "-10px";
-        this.div.style.left = (screenSize / 2) - (this.size / 2) + "px";
-    }
+    setMargins(screenSize) {}
 
-    startUp(health){
-
+    startUp(){
 
         this.id = setInterval(() => {
             if(this.health > 0){
@@ -122,6 +118,7 @@ class BaseEnemy extends BaseDamagable{
 
             }, 200);
 
+
            /* AudioHelper.playShot();
             this.bullets -= shootingCount*/
 
@@ -137,7 +134,7 @@ class BaseEnemy extends BaseDamagable{
         if(!this.isFinishedCycle) return;
 
         this.isFinishedCycle = false;
-        let distance = getRandValue(window.innerWidth / 5, window.innerWidth / 2);
+        let distance = 5000;
         let direction = getRandValue(0, 1);
         let waitTime = getRandValue(50, 100);
 
@@ -173,36 +170,19 @@ class BaseEnemy extends BaseDamagable{
                 this.isFinishedCycle = true;
                 clearInterval(id);
             }
-
         }, 10);
-
     }
-
 
     moveRight(){
 
-        if((this.positionX + this.path) > window.innerWidth){
-            let negativOffset = this.positionX + this.path - window.innerWidth;
-            this.positionX += this.path - negativOffset;
-            this.positionX -= negativOffset;
-            this.div.style.left = this.positionX + "px";
-        }else {
             this.positionX += this.path;
             this.div.style.left = this.positionX + "px";
-        }
     }
 
     moveLeft(){
 
-        if((this.positionX - this.path) < 0){
-            let negativOffset = this.positionX - this.path;
-            this.positionX -= negativOffset;
-            this.positionX += this.path - negativOffset;
-            this.div.style.left = this.positionX + "px";
-        }else {
             this.positionX -= this.path;
             this.div.style.left = this.positionX + "px";
-        }
     }
 
     destroyedDiv(){
