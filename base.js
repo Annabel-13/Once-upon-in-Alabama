@@ -132,7 +132,7 @@ class BaseEnemy extends BaseDamagable{
         let id = setInterval(() => {
 
 
-            if(distance > 0){
+            if(distance > 0 && this.health > 0){
                 let allowRight = (this.positionX  + this.size + this.path)  < window.innerWidth;
                 let allowLeft = (this.positionX - this.path) > 0;
 
@@ -150,7 +150,7 @@ class BaseEnemy extends BaseDamagable{
 
 
                 distance -= this.path;
-            } else if( waitTime > 0){
+            } else if( waitTime > 0 && this.health > 0){
                 waitTime -= 1;
                 this.div.style.backgroundColor = "#0000ff"
             } else{
