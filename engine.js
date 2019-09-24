@@ -18,7 +18,8 @@ class Gun extends BaseDecoration {
 
         let arm = document.createElement("div");
             arm.style.display = "inlineBlock";
-            arm.style.backgroundImage = "url('images/Arm.png')";
+            arm.style.backgroundImage = "url('images/Arm1.png')";
+            arm.style.backgroundColor = "yellow";
             arm.style.position = "fixed";
             arm.style.backgroundSize = "contain";
             arm.style.backgroundPosition = "center";
@@ -35,7 +36,7 @@ class Gun extends BaseDecoration {
     moveGun(document) {
 
         let onMouseUpdate = (ev) => {
-            this.div.style.left = ev.pageX + "px";
+            this.div.style.left = ev.pageX + 70 + "px";
         };
 
         document.addEventListener("mousemove", onMouseUpdate, false);

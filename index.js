@@ -25,7 +25,7 @@ document.body.style.cursor = "url('images/smallTarget.png'), auto";
 
 
 
-        // createCactus(window.innerHeight / 10, mainDiv, dictionary);
+        createCactus(window.innerHeight / 10, mainDiv, dictionary);
         appearTarget(mainDiv, dictionary, score);
 
 

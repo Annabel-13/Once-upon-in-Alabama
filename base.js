@@ -66,20 +66,23 @@ class BaseEnemy extends BaseDamagable{
     size = 200;
     bullets = 6;
     positionX = 200;
+    path = 8;
+    isFinishedCycle = true;
+    id;
 
 
     constructor(mainDiv, dictionary,tag) {
         super(mainDiv, dictionary,tag);
         this.div.style.width = this.size + "px";
-        this.div.style.height = this.size + "px";
+        this.div.style.height = 2 * this.size + "px";
         this.div.style.left = this.positionX + "px";
     }
 
     createChildDiv() {
         let baseEnemy = document.createElement('div');
-            baseEnemy.style.backgroundColor = "yellow";
-            baseEnemy.style.bottom = 20 + "px";
-            baseEnemy.style.position = "fixed";
+        baseEnemy.style.backgroundColor = "yellow";
+        baseEnemy.style.bottom = 20 + "px";
+        baseEnemy.style.position = "fixed";
         return baseEnemy;
     }
 
@@ -90,91 +93,111 @@ class BaseEnemy extends BaseDamagable{
 
     startUp(health){
 
-        // let makeShot = this.makeShoot();
-        // let makeRun = this.makeRun();
-        // let onDie = this.onDie();
 
-        let id = setInterval(function () {
-
-            if(health > 0){
-                console.log("test");
-                // makeShot();
-                // makeRun();
+        this.id = setInterval(() => {
+            if(this.health > 0){
+                this.makeShoot();
+                this.makeRun();
             } else{
-                // onDie();
-                clearInterval(this);
+                this.onDie();
+                clearInterval(this.id);
             }
-
-        },5);
-
-
-        // do {
-        //    /* this.makeShoot();
-        //     this.makeRun();*/
-        //     console.log("dasdasd");
-        // }while (this.health > 0);
-
+        }, 1000);
     }
 
     makeShoot(){
+
         if(this.bullets > 0){
             let shootingCount = getRandValue(1, this.bullets);
+
+
             AudioHelper.playShot();
             this.bullets -= shootingCount
+
+
         }else{
             AudioHelper.playEmptyGun();
-        }
+      }
     }
 
     makeRun(){
+        this.div.backgroundColor = "#00ff00";
 
+        if(!this.isFinishedCycle) return;
+
+        this.isFinishedCycle = false;
         let distance = getRandValue(window.innerWidth / 5, window.innerWidth / 2);
-        let currentPosition = this.positionX;
         let direction = getRandValue(0, 1);
-        let path = 5;
+        let waitTime = getRandValue(50, 100);
 
-        let id = setInterval(function () {
+        this.div.style.backgroundColor = "#ff0000";
+
+        let id = setInterval(() => {
+
 
             if(distance > 0){
-                direction === 0 ? moveLeft(currentPosition, path): moveRight(currentPosition, path);
-                distance -= path;
+                let allowRight = (this.positionX  + this.size + this.path)  < window.innerWidth;
+                let allowLeft = (this.positionX - this.path) > 0;
+
+
+
+                if(direction === 0 && !allowRight){
+                    direction = 1
+                } else if(direction === 1 && !allowLeft){
+                    direction = 0
+                }
+
+                if(direction === 1){
+                    this.moveLeft();
+                }else if(direction === 0){
+                    this.moveRight();
+                }
+
+
+                distance -= this.path;
+            } else if( waitTime > 0){
+                waitTime -= 1;
+                this.div.style.backgroundColor = "#0000ff"
             } else{
+                this.isFinishedCycle = true;
                 clearInterval(id);
             }
 
-        },5);
+        }, 10);
+
+    }
 
 
-        function moveRight(currentPosition, path){
+    moveRight(){
 
-            if(currentPosition + path > window.innerWidth){
-                let negativOffset = currentPosition + path - window.innerWidth;
-                currentPosition +=  path - negativOffset;
-                currentPosition -= negativOffset;
-                this.div.style.left = currentPosition + "px";
-            }else {
-                currentPosition += path;
-                this.div.style.left = currentPosition + "px";
-            }
+        if((this.positionX + this.path) > window.innerWidth){
+            let negativOffset = this.positionX + this.path - window.innerWidth;
+            this.positionX += this.path - negativOffset;
+            this.positionX -= negativOffset;
+            this.div.style.left = this.positionX + "px";
+        }else {
+            this.positionX += this.path;
+            this.div.style.left = this.positionX + "px";
         }
+    }
 
+    moveLeft(){
 
-        function moveLeft(currentPosition, path){
-
-            if(currentPosition - path < 0){
-                let negativOffset = currentPosition - path;
-                currentPosition -= negativOffset;
-                currentPosition += path - negativOffset;
-                this.div.style.left = currentPosition + "px";
-            }else {
-                currentPosition -= path;
-                this.div.style.left = currentPosition + "px";
-            }
+        if((this.positionX - this.path) < 0){
+            let negativOffset = this.positionX - this.path;
+            this.positionX -= negativOffset;
+            this.positionX += this.path - negativOffset;
+            this.div.style.left = this.positionX + "px";
+        }else {
+            this.positionX -= this.path;
+            this.div.style.left = this.positionX + "px";
         }
     }
 
     destroyedDiv(){
-        this.health -= 20;
+        if( this.health > 0){
+            this.health -= 20;
+        }
     }
 
     onReload(){
@@ -186,6 +209,7 @@ class BaseEnemy extends BaseDamagable{
     }
 
     onDie(){
+//        this.div.style.visibility = "hidden"
         throw new Error("ChildClass should overwrite 'onDie' ");
     }
 }
