@@ -19,17 +19,16 @@ class Gun extends BaseDecoration {
         let arm = document.createElement("div");
             arm.style.display = "inlineBlock";
             arm.style.backgroundImage = "url('images/Arm1.png')";
-            arm.style.backgroundColor = "yellow";
             arm.style.position = "fixed";
             arm.style.backgroundSize = "contain";
+            arm.style.backgroundColor = "red";
             arm.style.backgroundPosition = "center";
             arm.style.backgroundRepeat = "no-repeat";
-
         return arm;
     }
 
     setMargins(screenSize) {
-        this.div.style.bottom = "-10px";
+        this.div.style.bottom = "-80px";
         this.div.style.left = (screenSize / 2) - (this.size / 2) + "px";
     }
 
