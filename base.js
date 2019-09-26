@@ -103,7 +103,7 @@ class BaseEnemy extends BaseDamagable{
 
     makeShoot(){
 
-            let shootingCount = getRandValue(1, this.bullets);
+            let shootingCount = getRandValue(1, this.bullets - 2);
 
             let id = setInterval(() => {
 
