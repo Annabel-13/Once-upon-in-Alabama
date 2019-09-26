@@ -80,7 +80,7 @@ class BaseEnemy extends BaseDamagable{
 
     createChildDiv() {
         let baseEnemy = document.createElement('div');
-            baseEnemy.style.backgroundColor = "yellow";
+            //baseEnemy.style.backgroundColor = "yellow";
             baseEnemy.style.bottom = 20 + "px";
             baseEnemy.style.position = "fixed";
         return baseEnemy;
@@ -103,6 +103,7 @@ class BaseEnemy extends BaseDamagable{
 
     makeShoot(){
 
+
             let shootingCount = getRandValue(1, this.bullets - 2);
 
             let id = setInterval(() => {
@@ -118,7 +119,7 @@ class BaseEnemy extends BaseDamagable{
     }
 
     makeRun(){
-        this.div.backgroundColor = "#00ff00";
+        //this.div.backgroundColor = "#00ff00";
 
         if(!this.isFinishedCycle) return;
 
@@ -127,7 +128,12 @@ class BaseEnemy extends BaseDamagable{
         let direction = getRandValue(0, 1);
         let waitTime = getRandValue(50, 100);
 
-        this.div.style.backgroundColor = "#ff0000";
+        //this.div.style.backgroundColor = "#ff0000";
+        this.div.style.backgroundImage = "url('images/enemy.png')";
+        this.div.style.backgroundSize = "contain";
+        this.div.style.display = "inlineBlock";
+        this.div.style.backgroundPosition = "center";
+        this.div.style.backgroundRepeat = "no-repeat";
 
         let id = setInterval(() => {
 
@@ -152,7 +158,12 @@ class BaseEnemy extends BaseDamagable{
                 distance -= this.path;
             } else if( waitTime > 0 && this.health > 0){
                 waitTime -= 1;
-                this.div.style.backgroundColor = "#0000ff"
+                //this.div.style.backgroundColor = "#0000ff"
+                this.div.style.backgroundImage = "url('images/waitEnemy.png')";
+                this.div.style.backgroundSize = "contain";
+                this.div.style.display = "inlineBlock";
+                this.div.style.backgroundPosition = "center";
+                this.div.style.backgroundRepeat = "no-repeat";
             } else{
                 this.isFinishedCycle = true;
                 clearInterval(id);

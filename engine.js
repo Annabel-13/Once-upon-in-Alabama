@@ -10,7 +10,7 @@ class Gun extends BaseDecoration {
 
     constructor(mainDiv) {
         super(mainDiv);
-        this.div.style.width = this.size + "px";
+        this.div.style.width = this.size - 50 + "px";
         this.div.style.height = this.size + "px";
     }
 
@@ -21,7 +21,6 @@ class Gun extends BaseDecoration {
             arm.style.backgroundImage = "url('images/Arm1.png')";
             arm.style.position = "fixed";
             arm.style.backgroundSize = "contain";
-            arm.style.backgroundColor = "red";
             arm.style.backgroundPosition = "center";
             arm.style.backgroundRepeat = "no-repeat";
         return arm;
