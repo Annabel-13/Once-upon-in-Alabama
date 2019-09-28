@@ -1,7 +1,7 @@
 
 
 /*
-    this is base decoration classe
+    this is base decoration class
     - construct will append each child to panorama
     - create child will create child div
     - setMargin will set position of div
@@ -40,7 +40,6 @@ class BaseDamagable extends BaseDecoration{
         }
 
         this.div.tag = tag;
-        console.log(tag);
         dictionary[this.div.tag] = this;
     }
 
@@ -58,16 +57,27 @@ class BaseDamagable extends BaseDecoration{
     @metod onDamage
     @metod onDie
 */
+/*
+* я наследую ган от демеджэйбла
+* задаю тег гану
+* в бейзэнеми я прописую поиск по тегу гана
+* и беру его ширину + отступы
+* пишу рандом по полученной ширине
+* если энеми попал в рамки от начала нашей ширины до конца, то у нас отничается жизнь
+*
+* */
 class BaseEnemy extends BaseDamagable{
 
 
 
-    health = 100;
+    enemyHealth = 100;
     size = 200;
     bullets = 6;
     positionX = 200;
     path = 8;
-    isFinishedCycle = true;
+    isFinishedRun = true;
+    isFinishedShoot = true;
+    isOnReload = false;
     id;
 
 
@@ -80,7 +90,6 @@ class BaseEnemy extends BaseDamagable{
 
     createChildDiv() {
         let baseEnemy = document.createElement('div');
-            //baseEnemy.style.backgroundColor = "yellow";
             baseEnemy.style.bottom = 20 + "px";
             baseEnemy.style.position = "fixed";
         return baseEnemy;
@@ -91,9 +100,10 @@ class BaseEnemy extends BaseDamagable{
     startUp(){
 
         this.id = setInterval(() => {
-            if(this.health > 0){
-                this.makeShoot();
+            if(this.enemyHealth > 0){
+                this.bullets > 0 ? this.makeShoot() : this.makeReload();
                 this.makeRun();
+                console.log(this.enemyHealth);
             } else{
                 this.onDie();
                 clearInterval(this.id);
@@ -103,32 +113,58 @@ class BaseEnemy extends BaseDamagable{
 
     makeShoot(){
 
+        if(!this.isFinishedShoot || this.enemyHealth < 1)return;
 
-            let shootingCount = getRandValue(1, this.bullets - 2);
+
+        this.isFinishedShoot = false;
+        let maxBulletsCount = 6;
+
+            let shootingCount = getRandValue(1,maxBulletsCount);
 
             let id = setInterval(() => {
 
-                if(shootingCount > 0){
+                if(this.bullets > 0){
                     AudioHelper.playShot();
-                    shootingCount -= 1;
-                }else{
+                    this.bullets -= 1;
+                } else {
                     AudioHelper.playEmptyGun();
-                    clearInterval(id);
                 }
-            }, 200);
+
+                if(shootingCount < 1){
+                    this.isFinishedShoot = true;
+                    clearInterval(id);
+                }else{
+                    shootingCount -=1;
+                }
+
+            }, 1500);
+
+
     }
 
+    makeReload(){
+        if(this.isOnReload || this.enemyHealth < 1) return;
+            this.isOnReload = true;
+
+        AudioHelper.playReload();
+        setTimeout(()=> {
+            this.bullets = 6;
+            this.isOnReload = false;
+        }, 5000);
+    }
+    
+
     makeRun(){
-        //this.div.backgroundColor = "#00ff00";
 
-        if(!this.isFinishedCycle) return;
+        if(!this.isFinishedRun || this.enemyHealth < 1) return;
+            this.isFinishedRun = false;
 
-        this.isFinishedCycle = false;
+
         let distance = getRandValue(window.innerWidth / 5, window.innerWidth / 2);
         let direction = getRandValue(0, 1);
         let waitTime = getRandValue(50, 100);
 
-        //this.div.style.backgroundColor = "#ff0000";
+
         this.div.style.backgroundImage = "url('images/enemy.png')";
         this.div.style.backgroundSize = "contain";
         this.div.style.display = "inlineBlock";
@@ -138,7 +174,7 @@ class BaseEnemy extends BaseDamagable{
         let id = setInterval(() => {
 
 
-            if(distance > 0 && this.health > 0){
+            if(distance > 0 && this.enemyHealth > 0){
                 let allowRight = (this.positionX  + this.size + this.path)  < window.innerWidth;
                 let allowLeft = (this.positionX - this.path) > 0;
 
@@ -156,16 +192,15 @@ class BaseEnemy extends BaseDamagable{
 
 
                 distance -= this.path;
-            } else if( waitTime > 0 && this.health > 0){
+            } else if( waitTime > 0 && this.enemyHealth > 0){
                 waitTime -= 1;
-                //this.div.style.backgroundColor = "#0000ff"
                 this.div.style.backgroundImage = "url('images/waitEnemy.png')";
                 this.div.style.backgroundSize = "contain";
                 this.div.style.display = "inlineBlock";
                 this.div.style.backgroundPosition = "center";
                 this.div.style.backgroundRepeat = "no-repeat";
             } else{
-                this.isFinishedCycle = true;
+                this.isFinishedRun = true;
                 clearInterval(id);
             }
         }, 10);
@@ -182,8 +217,8 @@ class BaseEnemy extends BaseDamagable{
     }
 
     destroyedDiv(){
-        if( this.health > 0){
-            this.health -= 20;
+        if( this.enemyHealth > 0){
+            this.enemyHealth -= 20;
         }
     }
 

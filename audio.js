@@ -23,4 +23,8 @@ class AudioHelper {
     static playScore(){
         this.play('sounds/dikiyZapad.mp3');
     }
+
+    static playDie(){
+        this.play('sounds/simpsndoh.mp3');
+    }
 }

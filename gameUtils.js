@@ -2,6 +2,7 @@
 
 class GameScore extends BaseDecoration{
 
+    enemyHealth = 100;
     height = 200;
     colors = [
         "#8f48af",
@@ -48,34 +49,28 @@ class GameScore extends BaseDecoration{
 
     //здесь мы должны создать табличку, она выплывет на середину и заиграет музыка
 
-    showTable(){
-        this.annFadeIn();
+   showTable(){
+
+        if(this.enemyHealth < 0){
+            this.scoreAppearAnimation();
+            AudioHelper.playScore();
+        }
+
     }
+    scoreAppearAnimation(div){
 
-    annFadeIn(){
+        let currentSize = -height;
 
-        let currentOpacityValue = 0;
-        let currentDiv = this.div;
+        let id = setInterval(function() {
+            if(currentSize < 0){
+                currentSize += 5;
+                div.style.bottom =  currentSize + "px";
+            }else {
+                clearInterval(id);
+            }
+        }, 5);
 
-        let id = setInterval(function () {
-            currentDiv.style.opacity = currentOpacityValue / 10;
-            currentOpacityValue < 10 ? currentOpacityValue +=1: clearInterval(id);
-        }, 80);
-
-    };
-
-
-    annFadeOut(){
-
-        let currentOpacityValue = 10;
-        let currentDiv = this.div;
-
-        let id = setInterval(function () {
-            currentDiv.style.opacity = currentOpacityValue / 10;
-            currentOpacityValue > 0 ? currentOpacityValue -=1: clearInterval(id);
-        }, 80);
-
-    };
+    }
 
     setText(text){
         this.div.innerText = text;
@@ -100,6 +95,11 @@ class Panorama {
             mainDiv.style.width = window.innerWidth + "px";
             mainDiv.style.height = window.innerHeight + "px";
             mainDiv.style.backgroundColor = this.colors[0];
+            mainDiv.style.backgroundImage = "url('images/desert.png')";
+            mainDiv.style.position = "fixed";
+            mainDiv.style.backgroundSize = "cover";
+            mainDiv.style.backgroundPosition = "center";
+            mainDiv.style.backgroundRepeat = "no-repeat";
             mainDiv.style.top = 0;
             mainDiv.style.left = 0;
             mainDiv.style.position = "fixed";

@@ -1,4 +1,13 @@
-
+/*
+* создать хелс, передать инстанс хелстейбл,
+* *переименовать ган в енджайн
+наследоваться от демеджейбла
+*
+*
+*
+*
+*
+* */
 class Gun extends BaseDecoration {
 
 
@@ -104,7 +113,7 @@ class Gun extends BaseDecoration {
             let id = setInterval(function () {
                 if(currentSize < 0){
                     currentSize += 5;
-                    div.style.bottom = currentSize + "px";
+                    div.style.bottom =  currentSize - 20 + "px";
                 }else {
                     clearInterval(id);
                 }

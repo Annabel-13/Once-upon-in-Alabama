@@ -8,10 +8,10 @@ document.body.style.cursor = "url('images/smallTarget.png'), auto";
     let dictionary = {};
 
     let mainDiv = new Panorama().createMainDiv();
-    let moon = new Moon(mainDiv, dictionary, "moon");
-        moon.setMargins("50px", "50px");
+    let fantom = new Fantom(mainDiv, dictionary, "fantom");
+        fantom.setMargins("50px", "50px");
 
-    let score = new GameScore(mainDiv, "500");
+    let score = new GameScore(mainDiv, "You win!");
     let border = score.height / 10;
     let scoreHeight = score.height + border;
         score.setMargins(0 + "px", (window.innerHeight - scoreHeight) + "px");
@@ -29,7 +29,7 @@ document.body.style.cursor = "url('images/smallTarget.png'), auto";
         appearTarget(mainDiv, dictionary, score);
 
 
-        let currentValue = 0;
+        /*let currentValue = 0;
         let id = setInterval(function () {
 
             if(currentValue < 100){
@@ -38,7 +38,7 @@ document.body.style.cursor = "url('images/smallTarget.png'), auto";
             }else {
                 clearInterval(id);
             }
-        }, 200);
+        }, 200);*/
 
 
     document.body.append(mainDiv);
