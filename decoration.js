@@ -1,11 +1,12 @@
 
 
 //draw moon
-class Moon extends BaseDamagable{
+class Fantom extends BaseDamagable{
 
-    image = ["url('images/Moon.png')", "url('images/Half-Moon-PNG-Pic.png')"];
+    health = 100;
+    image = ["url('images/bird.png')", "url('images/bat.png')"];
 
-    constructor(mainDiv, dictionary,tag){
+    constructor(mainDiv, dictionary,tag,){
         super(mainDiv, dictionary,tag);
         this.div.style.backgroundImage = this.image[0];
     }
@@ -18,21 +19,24 @@ class Moon extends BaseDamagable{
 
     createChildDiv(){
         let size = 200;
-        let moon = document.createElement("div");
-            moon.style.width = size + "px";
-            moon.style.height =  size + "px";
-            moon.style.display = "inlineBlock";
-            moon.style.position = "fixed";
-            moon.style.backgroundSize = "contain";
-            moon.style.backgroundPosition = "center";
-            moon.style.backgroundRepeat = "no-repeat";
+        let fantom = document.createElement("div");
+            fantom.style.width = size + "px";
+            fantom.style.height =  size + "px";
+            fantom.style.display = "inlineBlock";
+            fantom.style.position = "fixed";
+            fantom.style.backgroundSize = "contain";
+            fantom.style.backgroundPosition = "center";
+            fantom.style.backgroundRepeat = "no-repeat";
 
-        return moon;
+        return fantom;
     }
 
 
     destroyedDiv() {
-        this.div.style.backgroundImage = this.image[1];
+        if( this.div.style.backgroundImage = this.image[1]){
+            this.health = this.health / 2;
+        }
+
     }
 }
 
