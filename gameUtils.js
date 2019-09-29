@@ -182,10 +182,9 @@ class HealthScore extends BaseDecoration{
 
 
     setHealthValue(currentHealthValue){
-        let personHealthValue = (this.maxHealthValue - currentHealthValue);
-        this.textDiv.innerText = personHealthValue + "%";
-        this.contentDiv.style.width = this.width - currentHealthValue * (this.width / this.maxHealthValue) + "px";
-        this.contentDiv.style.backgroundColor = personHealthValue > 50 ? "#0ba754": personHealthValue > 33 ? "#f8ef48" : "#f83837";
+        this.textDiv.innerText = currentHealthValue + "%";
+        this.contentDiv.style.width =  currentHealthValue * (this.width / this.maxHealthValue) + "px";
+        this.contentDiv.style.backgroundColor = currentHealthValue > 50 ? "#0ba754": currentHealthValue > 33 ? "#f8ef48" : "#f83837";
     }
 
 

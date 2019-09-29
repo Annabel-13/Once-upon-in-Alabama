@@ -1,6 +1,6 @@
 class DrunkJoy extends BaseEnemy{
 
-
+    accuracy = 10;
 
     constructor(mainDiv, dictionary,tag) {
         super(mainDiv, dictionary,tag);
@@ -17,6 +17,7 @@ class DrunkJoy extends BaseEnemy{
        this.div.style.borderStyle = "dashed";
        this.div.style.borderWidth = 10 + "px";
     }
+
 
     onDie(){
         //this.div.style.backgroundColor = "#000";

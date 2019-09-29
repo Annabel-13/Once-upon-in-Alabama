@@ -26,20 +26,7 @@ document.body.style.cursor = "url('images/smallTarget.png'), auto";
 
 
         createCactus(window.innerHeight / 10, mainDiv, dictionary);
-        appearTarget(mainDiv, dictionary, score);
-
-
-        /*let currentValue = 0;
-        let id = setInterval(function () {
-
-            if(currentValue < 100){
-                currentValue += 1;
-                healthScore.setHealthValue(currentValue);
-            }else {
-                clearInterval(id);
-            }
-        }, 200);*/
-
+        appearTarget(mainDiv, dictionary, "gun",healthScore);
 
     document.body.append(mainDiv);
 
@@ -64,12 +51,13 @@ function createCactus(maxValue, mainDiv, dictionary) {
 
 }}
 
-function appearTarget(mainDiv, dictionary,score){
-    let gun = new Gun(mainDiv);
-        gun.setMargins(window.innerWidth);
-        gun.moveGun(document);
-        gun.preparedGun(dictionary,score);
-        gun.preparedReloadGun();
+function appearTarget(mainDiv, dictionary,tag, healthTable){
+    let engine = new Engine(mainDiv, dictionary, tag, healthTable);
+    console.log(tag);
+        engine.setMargins(window.innerWidth);
+        engine.moveGun(document);
+        engine.preparedGun(dictionary);
+        engine.preparedReloadGun();
 }
 
 

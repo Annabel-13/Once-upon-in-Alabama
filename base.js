@@ -32,6 +32,8 @@ class BaseDecoration {
 
 class BaseDamagable extends BaseDecoration{
 
+    dictionary;
+
     constructor(mainDiv, dictionary,tag){
         super(mainDiv);
 
@@ -41,11 +43,12 @@ class BaseDamagable extends BaseDecoration{
 
         this.div.tag = tag;
         dictionary[this.div.tag] = this;
+        this.dictionary = dictionary;
     }
 
 
-    destroyedDiv(){
-        throw new Error("ChildDamage should overwrite 'destroyedDiv' ");
+    didDamage(){
+        throw new Error("ChildDamage should overwrite 'didDamage' ");
     }
 }
 
@@ -58,11 +61,11 @@ class BaseDamagable extends BaseDecoration{
     @metod onDie
 */
 /*
-* я наследую ган от демеджэйбла
-* задаю тег гану
-* в бейзэнеми я прописую поиск по тегу гана
-* и беру его ширину + отступы
-* пишу рандом по полученной ширине
+* я наследую ган от демеджэйбла +
+* задаю тег гану +
+* в бейзэнеми я прописую поиск по тегу гана+
+* и беру его ширину + отступы +
+* пишу рандом по полученной ширине +
 * если энеми попал в рамки от начала нашей ширины до конца, то у нас отничается жизнь
 *
 * */
@@ -79,6 +82,7 @@ class BaseEnemy extends BaseDamagable{
     isFinishedShoot = true;
     isOnReload = false;
     id;
+    accuracy = 100;
 
 
     constructor(mainDiv, dictionary,tag) {
@@ -103,7 +107,6 @@ class BaseEnemy extends BaseDamagable{
             if(this.enemyHealth > 0){
                 this.bullets > 0 ? this.makeShoot() : this.makeReload();
                 this.makeRun();
-                console.log(this.enemyHealth);
             } else{
                 this.onDie();
                 clearInterval(this.id);
@@ -125,6 +128,26 @@ class BaseEnemy extends BaseDamagable{
 
                 if(this.bullets > 0){
                     AudioHelper.playShot();
+                    let engine = this.dictionary["gun"];
+
+                    let divLeft = engine.div.style.left;
+                    let startX = Number(divLeft.substring(0, divLeft.length - 2));
+
+                    let minRand = startX - this.accuracy;
+                    let maxRand = startX + engine.size + this.accuracy;
+                    let shootCoord = getRandValue(minRand, maxRand );
+
+                    if(shootCoord >= startX && shootCoord <= startX + engine.size){
+                        console.log("В нас попали!");
+                        engine.didDamage();
+                    }else {
+                        console.log("В нас не попали!");
+                    }
+
+
+
+
+
                     this.bullets -= 1;
                 } else {
                     AudioHelper.playEmptyGun();
@@ -216,7 +239,7 @@ class BaseEnemy extends BaseDamagable{
             this.div.style.left = this.positionX + "px";
     }
 
-    destroyedDiv(){
+    didDamage(){
         if( this.enemyHealth > 0){
             this.enemyHealth -= 20;
         }

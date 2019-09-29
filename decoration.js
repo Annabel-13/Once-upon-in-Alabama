@@ -32,11 +32,8 @@ class Fantom extends BaseDamagable{
     }
 
 
-    destroyedDiv() {
-        if( this.div.style.backgroundImage = this.image[1]){
-            this.health = this.health / 2;
-        }
-
+    didDamage() {
+        this.div.style.backgroundImage = this.image[1]
     }
 }
 
@@ -70,7 +67,7 @@ class Cactus extends BaseDamagable{
         return cactus;
     }
 
-    destroyedDiv() {
+    didDamage() {
         this.div.style.backgroundImage = this.image[1];
     }
 

@@ -1,24 +1,27 @@
 /*
 * создать хелс, передать инстанс хелстейбл,
-* *переименовать ган в енджайн
-наследоваться от демеджейбла
+* *переименовать ган в енджайн +
+наследоваться от демеджейбла +
 *
 *
 *
 *
 *
 * */
-class Gun extends BaseDecoration {
+class Engine extends BaseDamagable {
 
 
     bullets = 6;
     size = 300;
     isLoading = false;
+    health = 100;
+    healthTable;
 
 
 
-    constructor(mainDiv) {
-        super(mainDiv);
+    constructor(mainDiv, dictionary,tag,healthTable) {
+        super(mainDiv, dictionary,tag);
+        this.healthTable = healthTable;
         this.div.style.width = this.size - 50 + "px";
         this.div.style.height = this.size + "px";
     }
@@ -50,18 +53,21 @@ class Gun extends BaseDecoration {
         document.addEventListener("mouseenter", onMouseUpdate, false);
     };
 
-    preparedGun(dictionary,score) {
+    preparedGun(dictionary) {
 
         document.onclick = (ev) => {
 
             if(this.bullets > 0){
                 let key = ev.target.tag;
 
-                     score.setText(key);
-
                 if(key !== undefined){
-                   dictionary[key].destroyedDiv();
+                   dictionary[key].didDamage();
                 }
+
+                if(key === "fantom"){
+                   this.changeHealthValue(this.health -= 20);
+                }
+
 
                 AudioHelper.playShot();
                 this.bullets -= 1
@@ -70,6 +76,19 @@ class Gun extends BaseDecoration {
             }
 
         };
+    }
+
+    changeHealthValue(value){
+
+        if(value < 0){
+            this.health = 0;
+        } else if(value > 100){
+            this.health = 100;
+        }else {
+            this.health = value;
+        }
+
+        this.healthTable.setHealthValue(value);
     }
 
     preparedReloadGun(){
@@ -119,6 +138,10 @@ class Gun extends BaseDecoration {
                 }
             }, 5);
 
+    }
+
+    didDamage() {
+        this.changeHealthValue(this.health -= 10);
     }
 }
 
