@@ -9,11 +9,11 @@ class DrunkJoy extends BaseEnemy{
 
 
     onReload(){
-       AudioHelper.playReload();
+       AudioHelper.getInstance().playReload();
     }
 
     onDamage(){
-        AudioHelper.playDamageEnemy();
+        AudioHelper.getInstance().playDamageEnemy();
         console.log(this.enemyHealth);
     }
 
@@ -25,7 +25,7 @@ class DrunkJoy extends BaseEnemy{
         this.div.style.backgroundPosition = "center";
         this.div.style.backgroundRepeat = "no-repeat";
         this.div.style.bottom = -20 + "px";
-        AudioHelper.playDie();
+        AudioHelper.getInstance().playDie();
     }
 
 }

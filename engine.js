@@ -69,10 +69,10 @@ class Engine extends BaseDamagable {
                 }
 
 
-                AudioHelper.playShot();
+                AudioHelper.getInstance().playShot();
                 this.bullets -= 1
             }else{
-                AudioHelper.playEmptyGun();
+                AudioHelper.getInstance().playEmptyGun();
             }
 
         };
@@ -118,7 +118,7 @@ class Engine extends BaseDamagable {
                         currentSize -= 5;
                         div.style.bottom = currentSize + "px";
                     }else {
-                        AudioHelper.playReload();
+                        AudioHelper.getInstance().playReload();
                         clearInterval(id);
                     }
                 }, 5);

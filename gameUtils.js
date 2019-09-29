@@ -53,7 +53,7 @@ class GameScore extends BaseDecoration{
 
         if(this.enemyHealth < 0){
             this.scoreAppearAnimation();
-            AudioHelper.playScore();
+            AudioHelper.getInstance().playScore();
         }
 
     }

@@ -1,33 +1,75 @@
 class AudioHelper {
 
-    static play(sound){
-        let audio = new Audio();
-            audio.src = sound;
-            audio.load();
-            audio.play();
 
+
+    static instance;
+    audio = new Audio();
+    isPlaying = false;
+
+    static getInstance(){
+        if(this.instance === undefined){
+            this.instance = new AudioHelper();
+            this.instance.audio.onplaying = () => {
+                this.isPlaying = true;
+            };
+            this.instance.audio.onpause = () => {
+                this.isPlaying = false;
+            };
+        }
+
+        return this.instance;
     }
 
-    static playEmptyGun(){
+
+     playAudio() {
+        if (this.audio.paused && !this.isPlaying) {
+            this.audio.play();
+        }
+    }
+
+    pauseAudio() {
+        if (!this.audio.paused && this.isPlaying) {
+            this.audio.stop();
+        }
+    }
+
+     play(sound){
+        this.pauseAudio();
+        this.audio.src = sound;
+        this.audio.load();
+
+
+         setTimeout(() => {this.playAudio();}, 0);
+    }
+
+     stop(){
+        this.pauseAudio();
+    }
+
+     playEmptyGun(){
         this.play('sounds/gunEmpty.mp3');
     }
 
-    static playShot(){
+     playShot(){
         this.play('sounds/shot.mp3');
     }
 
-    static playReload(){
+    playShotEnemy(){
+        this.play('sounds/enemyShot.mp3');
+    }
+
+     playReload(){
         this.play('sounds/reload.mp3');
     }
 
-    static playScore(){
+     playScore(){
         this.play('sounds/dikiyZapad.mp3');
     }
 
-    static playDie(){
+     playDie(){
         this.play('sounds/simpsndoh.mp3');
     }
-    static playDamageEnemy(){
+     playDamageEnemy(){
         this.play('sounds/ahhh.mp3');
     }
 }

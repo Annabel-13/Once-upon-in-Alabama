@@ -108,6 +108,7 @@ class BaseEnemy extends BaseDamagable{
                 this.bullets > 0 ? this.makeShoot() : this.makeReload();
                 this.makeRun();
             } else{
+                AudioHelper.getInstance().stop();
                 this.onDie();
                 clearInterval(this.id);
             }
@@ -127,8 +128,9 @@ class BaseEnemy extends BaseDamagable{
             let id = setInterval(() => {
 
                 if(this.bullets > 0){
-                    AudioHelper.playShot();
+                    AudioHelper.getInstance().playShotEnemy();
                     let engine = this.dictionary["gun"];
+                    console.log("здоровье врага: " + this.enemyHealth);
 
                     let divLeft = engine.div.style.left;
                     let startX = Number(divLeft.substring(0, divLeft.length - 2));
@@ -150,7 +152,7 @@ class BaseEnemy extends BaseDamagable{
 
                     this.bullets -= 1;
                 } else {
-                    AudioHelper.playEmptyGun();
+                    AudioHelper.getInstance().playEmptyGun();
                 }
 
                 if(shootingCount < 1){
@@ -169,7 +171,7 @@ class BaseEnemy extends BaseDamagable{
         if(this.isOnReload || this.enemyHealth < 1) return;
             this.isOnReload = true;
 
-        AudioHelper.playReload();
+        AudioHelper.getInstance().playReload();
         setTimeout(()=> {
             this.bullets = 6;
             this.isOnReload = false;
