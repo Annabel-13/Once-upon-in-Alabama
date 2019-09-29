@@ -17,16 +17,16 @@ document.body.style.cursor = "url('images/smallTarget.png'), auto";
         score.setMargins(0 + "px", (window.innerHeight - scoreHeight) + "px");
         score.showTable();
 
-        let healthScore = new HealthScore(mainDiv);
-
 
         let enemies = new DrunkJoy(mainDiv,dictionary,"drunker");
 
-
-
-
         createCactus(window.innerHeight / 10, mainDiv, dictionary);
-        appearTarget(mainDiv, dictionary, "gun",healthScore);
+
+
+
+        appearTarget(mainDiv, dictionary, "gun",new HealthScore(mainDiv));
+
+
 
     document.body.append(mainDiv);
 

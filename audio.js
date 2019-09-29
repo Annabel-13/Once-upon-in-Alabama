@@ -27,4 +27,7 @@ class AudioHelper {
     static playDie(){
         this.play('sounds/simpsndoh.mp3');
     }
+    static playDamageEnemy(){
+        this.play('sounds/ahhh.mp3');
+    }
 }

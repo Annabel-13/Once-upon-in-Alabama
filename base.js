@@ -242,6 +242,7 @@ class BaseEnemy extends BaseDamagable{
     didDamage(){
         if( this.enemyHealth > 0){
             this.enemyHealth -= 20;
+            this.onDamage();
         }
     }
 

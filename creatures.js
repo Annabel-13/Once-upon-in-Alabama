@@ -13,14 +13,12 @@ class DrunkJoy extends BaseEnemy{
     }
 
     onDamage(){
-       this.div.style.borderColor = "#ff0000";
-       this.div.style.borderStyle = "dashed";
-       this.div.style.borderWidth = 10 + "px";
+        AudioHelper.playDamageEnemy();
+        console.log(this.enemyHealth);
     }
 
 
     onDie(){
-        //this.div.style.backgroundColor = "#000";
         this.div.style.backgroundImage = "url('images/gravestone.png')";
         this.div.style.backgroundSize = "contain";
         this.div.style.display = "inlineBlock";
