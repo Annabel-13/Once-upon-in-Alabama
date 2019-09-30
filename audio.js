@@ -61,6 +61,9 @@ class AudioHelper {
      playReload(){
         this.play('sounds/reload.mp3');
     }
+    playReloadEnemy(){
+        this.play('sounds/perezaryadka-orujiya.mp3');
+    }
 
      playScore(){
         this.play('sounds/dikiyZapad.mp3');

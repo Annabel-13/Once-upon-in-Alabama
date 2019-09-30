@@ -171,7 +171,7 @@ class BaseEnemy extends BaseDamagable{
         if(this.isOnReload || this.enemyHealth < 1) return;
             this.isOnReload = true;
 
-        AudioHelper.getInstance().playReload();
+        AudioHelper.getInstance().playReloadEnemy();
         setTimeout(()=> {
             this.bullets = 6;
             this.isOnReload = false;
