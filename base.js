@@ -190,7 +190,7 @@ class BaseEnemy extends BaseDamagable{
         let waitTime = getRandValue(50, 100);
 
 
-        this.div.style.backgroundImage = "url('images/enemy.png')";
+        this.div.style.backgroundImage = "url('images/enemyCowboy.png')";
         this.div.style.backgroundSize = "contain";
         this.div.style.display = "inlineBlock";
         this.div.style.backgroundPosition = "center";
@@ -219,7 +219,7 @@ class BaseEnemy extends BaseDamagable{
                 distance -= this.path;
             } else if( waitTime > 0 && this.enemyHealth > 0){
                 waitTime -= 1;
-                this.div.style.backgroundImage = "url('images/waitEnemy.png')";
+                this.div.style.backgroundImage = "url('images/wait.png')";
                 this.div.style.backgroundSize = "contain";
                 this.div.style.display = "inlineBlock";
                 this.div.style.backgroundPosition = "center";
