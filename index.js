@@ -18,7 +18,10 @@ document.body.style.cursor = "url('images/smallTarget.png'), auto";
         score.showTable();
 
 
-        let enemies = new DrunkJoy(mainDiv,dictionary,"drunker");
+        let enemies1 = new DrunkJoy(mainDiv,dictionary,"drunker1");
+        let enemies2 = new DrunkBill(mainDiv,dictionary,"drunker2");
+        let enemies3 = new DrunkPhill(mainDiv,dictionary,"drunker3");
+
 
         createCactus(window.innerHeight / 10, mainDiv, dictionary);
 

@@ -76,7 +76,7 @@ class BaseEnemy extends BaseDamagable{
     enemyHealth = 100;
     size = 200;
     bullets = 6;
-    positionX = 200;
+    positionX = getRandValue(window.innerWidth, window.innerWidth / 3);
     path = 8;
     isFinishedRun = true;
     isFinishedShoot = true;
@@ -190,7 +190,7 @@ class BaseEnemy extends BaseDamagable{
         let waitTime = getRandValue(50, 100);
 
 
-        this.div.style.backgroundImage = "url('images/enemyCowboy.png')";
+        this.div.style.backgroundImage = "url('images/enemy.png')";
         this.div.style.backgroundSize = "contain";
         this.div.style.display = "inlineBlock";
         this.div.style.backgroundPosition = "center";
