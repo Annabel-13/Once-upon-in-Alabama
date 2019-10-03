@@ -65,7 +65,8 @@ class Engine extends BaseDamagable {
                 }
 
                 if(key === "fantom"){
-                   this.changeHealthValue(this.health -= 20);
+                    let newValue = this.health === 0 ? 0 : this.health - 10;
+                    this.changeHealthValue(newValue);
                 }
 
 
@@ -80,15 +81,8 @@ class Engine extends BaseDamagable {
 
     changeHealthValue(value){
 
-        if(value < 0){
-            this.health = 0;
-        } else if(value > 100){
-            this.health = 100;
-        }else {
-            this.health = value;
-        }
-
-        this.healthTable.setHealthValue(value);
+        this.health = value < 0 ? 0 : value > 100 ? 100 : value;
+        this.healthTable.setHealthValue(this.health);
     }
 
     preparedReloadGun(){
@@ -141,7 +135,8 @@ class Engine extends BaseDamagable {
     }
 
     didDamage() {
-        this.changeHealthValue(this.health -= 10);
+        let newValue = this.health === 0 ? 0 : this.health - 10;
+        this.changeHealthValue(newValue);
     }
 }
 

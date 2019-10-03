@@ -102,18 +102,19 @@ class BaseEnemy extends BaseDamagable{
     setMargins(screenSize) {}
 
     startUp(){
-
         this.id = setInterval(() => {
             if(this.enemyHealth > 0){
                 this.bullets > 0 ? this.makeShoot() : this.makeReload();
                 this.makeRun();
             } else{
                 AudioHelper.getInstance().stop();
+                this.lookDie();
                 this.onDie();
                 clearInterval(this.id);
             }
         }, 1000);
     }
+
 
     makeShoot(){
 
@@ -140,15 +141,8 @@ class BaseEnemy extends BaseDamagable{
                     let shootCoord = getRandValue(minRand, maxRand );
 
                     if(shootCoord >= startX && shootCoord <= startX + engine.size){
-                        console.log("В нас попали!");
                         engine.didDamage();
-                    }else {
-                        console.log("В нас не попали!");
                     }
-
-
-
-
 
                     this.bullets -= 1;
                 } else {
@@ -161,10 +155,7 @@ class BaseEnemy extends BaseDamagable{
                 }else{
                     shootingCount -=1;
                 }
-
             }, 1500);
-
-
     }
 
     makeReload(){
@@ -177,7 +168,7 @@ class BaseEnemy extends BaseDamagable{
             this.isOnReload = false;
         }, 5000);
     }
-    
+
 
     makeRun(){
 
@@ -185,16 +176,11 @@ class BaseEnemy extends BaseDamagable{
             this.isFinishedRun = false;
 
 
-        let distance = getRandValue(window.innerWidth / 5, window.innerWidth / 2);
+        let distance = getRandValue(window.innerWidth / 4, window.innerWidth);
         let direction = getRandValue(0, 1);
         let waitTime = getRandValue(50, 100);
 
-
-        this.div.style.backgroundImage = "url('images/enemy.png')";
-        this.div.style.backgroundSize = "contain";
-        this.div.style.display = "inlineBlock";
-        this.div.style.backgroundPosition = "center";
-        this.div.style.backgroundRepeat = "no-repeat";
+        this.lookRunning();
 
         let id = setInterval(() => {
 
@@ -219,17 +205,47 @@ class BaseEnemy extends BaseDamagable{
                 distance -= this.path;
             } else if( waitTime > 0 && this.enemyHealth > 0){
                 waitTime -= 1;
-                this.div.style.backgroundImage = "url('images/wait.png')";
-                this.div.style.backgroundSize = "contain";
-                this.div.style.display = "inlineBlock";
-                this.div.style.backgroundPosition = "center";
-                this.div.style.backgroundRepeat = "no-repeat";
+              this.lookWaiting();
             } else{
                 this.isFinishedRun = true;
                 clearInterval(id);
             }
         }, 10);
     }
+
+
+
+    /*
+      * make apeareance of enemy in time of diying
+      *
+      *
+      * it can be overwritten in child
+    * */
+    lookDie(){
+        this.div.style.backgroundImage = "url('images/gravestone.png')";
+        this.div.style.backgroundSize = "contain";
+        this.div.style.display = "inlineBlock";
+        this.div.style.backgroundPosition = "center";
+        this.div.style.backgroundRepeat = "no-repeat";
+        this.div.style.bottom = -20 + "px";
+    }
+
+    lookRunning(){
+        this.div.style.backgroundImage = "url('images/enemy.png')";
+        this.div.style.backgroundSize = "contain";
+        this.div.style.display = "inlineBlock";
+        this.div.style.backgroundPosition = "center";
+        this.div.style.backgroundRepeat = "no-repeat";
+    }
+
+    lookWaiting(){
+        this.div.style.backgroundImage = "url('images/wait.png')";
+        this.div.style.backgroundSize = "contain";
+        this.div.style.display = "inlineBlock";
+        this.div.style.backgroundPosition = "center";
+        this.div.style.backgroundRepeat = "no-repeat";
+    }
+
 
     moveRight(){
             this.positionX += this.path;

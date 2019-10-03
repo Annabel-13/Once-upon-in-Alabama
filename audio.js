@@ -21,11 +21,12 @@ class AudioHelper {
     }
 
 
-     playAudio() {
+    playAudio() {
         if (this.audio.paused && !this.isPlaying) {
             this.audio.play();
         }
     }
+
 
     pauseAudio() {
         if (!this.audio.paused && this.isPlaying) {
@@ -33,7 +34,8 @@ class AudioHelper {
         }
     }
 
-     play(sound){
+
+    play(sound){
         this.pauseAudio();
         this.audio.src = sound;
         this.audio.load();
@@ -42,37 +44,46 @@ class AudioHelper {
          setTimeout(() => {this.playAudio();}, 0);
     }
 
-     stop(){
+
+    stop(){
         this.pauseAudio();
     }
 
-     playEmptyGun(){
+
+    playEmptyGun(){
         this.play('sounds/gunEmpty.mp3');
     }
+
 
      playShot(){
         this.play('sounds/shot.mp3');
     }
 
+
     playShotEnemy(){
         this.play('sounds/enemyShot.mp3');
     }
 
-     playReload(){
+
+    playReload(){
         this.play('sounds/reload.mp3');
     }
+
+
     playReloadEnemy(){
         this.play('sounds/perezaryadka-orujiya.mp3');
     }
 
-     playScore(){
+    playScore(){
         this.play('sounds/dikiyZapad.mp3');
     }
 
-     playDie(){
+    playDie(){
         this.play('sounds/simpsndoh.mp3');
     }
-     playDamageEnemy(){
+
+
+    playDamageEnemy(){
         this.play('sounds/ahhh.mp3');
     }
 }

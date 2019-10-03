@@ -51,12 +51,6 @@ class DrunkBill extends BaseEnemy{
 
 
     onDie(){
-        this.div.style.backgroundImage = "url('images/gravestone.png')";
-        this.div.style.backgroundSize = "contain";
-        this.div.style.display = "inlineBlock";
-        this.div.style.backgroundPosition = "center";
-        this.div.style.backgroundRepeat = "no-repeat";
-        this.div.style.bottom = -20 + "px";
         AudioHelper.getInstance().playDie();
     }
 
@@ -83,13 +77,39 @@ class DrunkPhill extends BaseEnemy{
     }
 
 
-    onDie(){
-        this.div.style.backgroundImage = "url('images/gravestone.png')";
+    /*
+      * make apeareance of enemy in time of diying
+      *
+      *
+      * it can be overwritten in child
+    * */
+    lookDie(){
+        this.div.style.backgroundImage = "url('images/cact1.png')";
         this.div.style.backgroundSize = "contain";
         this.div.style.display = "inlineBlock";
         this.div.style.backgroundPosition = "center";
         this.div.style.backgroundRepeat = "no-repeat";
         this.div.style.bottom = -20 + "px";
+    }
+
+    lookRunning(){
+        this.div.style.backgroundImage = "url('images/Moon.png')";
+        this.div.style.backgroundSize = "contain";
+        this.div.style.display = "inlineBlock";
+        this.div.style.backgroundPosition = "center";
+        this.div.style.backgroundRepeat = "no-repeat";
+    }
+
+    lookWaiting(){
+        this.div.style.backgroundImage = "url('images/bat.png')";
+        this.div.style.backgroundSize = "contain";
+        this.div.style.display = "inlineBlock";
+        this.div.style.backgroundPosition = "center";
+        this.div.style.backgroundRepeat = "no-repeat";
+    }
+
+
+    onDie(){
         AudioHelper.getInstance().playDie();
     }
 
