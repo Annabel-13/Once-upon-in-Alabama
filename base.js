@@ -80,6 +80,7 @@ class BaseEnemy extends BaseDamagable{
     path = 8;
     isFinishedRun = true;
     isFinishedShoot = true;
+    isFinishedGame = false;
     isOnReload = false;
     id;
     accuracy = 100;
@@ -103,13 +104,15 @@ class BaseEnemy extends BaseDamagable{
 
     startUp(){
         this.id = setInterval(() => {
-            if(this.enemyHealth > 0){
+            if(this.enemyHealth > 0 && this.isFinishedGame === false){
                 this.bullets > 0 ? this.makeShoot() : this.makeReload();
                 this.makeRun();
             } else{
                 AudioHelper.getInstance().stop();
                 this.lookDie();
+                this.sendEventDie();
                 this.onDie();
+                console.log("I am dead " + this.div.tag);
                 clearInterval(this.id);
             }
         }, 1000);
@@ -128,7 +131,7 @@ class BaseEnemy extends BaseDamagable{
 
             let id = setInterval(() => {
 
-                if(this.bullets > 0){
+                if(this.bullets > 0 && this.enemyHealth > 0 && this.isFinishedGame === false){
                     AudioHelper.getInstance().playShotEnemy();
                     let engine = this.dictionary["gun"];
                     console.log("здоровье врага: " + this.enemyHealth);
@@ -159,7 +162,7 @@ class BaseEnemy extends BaseDamagable{
     }
 
     makeReload(){
-        if(this.isOnReload || this.enemyHealth < 1) return;
+        if(this.isOnReload || this.enemyHealth < 1 || this.isFinishedGame === true) return;
             this.isOnReload = true;
 
         AudioHelper.getInstance().playReloadEnemy();
@@ -185,7 +188,7 @@ class BaseEnemy extends BaseDamagable{
         let id = setInterval(() => {
 
 
-            if(distance > 0 && this.enemyHealth > 0){
+            if(distance > 0 && this.enemyHealth > 0 && this.isFinishedGame === false){
                 let allowRight = (this.positionX  + this.size + this.path)  < window.innerWidth;
                 let allowLeft = (this.positionX - this.path) > 0;
 
@@ -264,6 +267,20 @@ class BaseEnemy extends BaseDamagable{
         }
     }
 
+    sendEventDie(){
+
+        let myEvent = new CustomEvent("dieEnemy", {
+            detail: {
+                tag: this.div.tag
+            }
+        });
+        document.dispatchEvent(myEvent);
+    }
+
+    didGameFinish(){
+        this.isFinishedGame = true;
+    }
+
     onReload(){
         throw new Error("ChildClass should overwrite 'onReload' ");
     }
@@ -275,4 +292,6 @@ class BaseEnemy extends BaseDamagable{
     onDie() {
         throw new Error("ChildClass should overwrite 'onDie' ");
     }
+
+
 }

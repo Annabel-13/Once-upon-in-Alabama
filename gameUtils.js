@@ -2,8 +2,7 @@
 
 class GameScore extends BaseDecoration{
 
-    enemyHealth = 100;
-    height = 200;
+    divSize = 200;
     colors = [
         "#8f48af",
         "#f9f6ff",
@@ -20,15 +19,13 @@ class GameScore extends BaseDecoration{
         this.div.style.backgroundColor = this.colors[2];
         this.div.style.color = this.colors[1];
         this.div.style.border = this.colors[3];
-        this.div.style.bottom = (window.innerHeight / 2) - (this.height / 2) + "px" ;
-        this.div.style.left = (window.innerWidth / 2) - this.height + "px";
-        this.div.style.lineHeight = this.height + 'px';
+        this.div.style.lineHeight = this.divSize + 'px';
         this.div.style.borderStyle = this.borderStyle;
-        this.div.style.fontSize = this.height / 2 + "px";
-        this.div.style.borderWidth = this.height / 20 + "px";
+        this.div.style.fontSize = this.divSize / 4 + "px";
+        this.div.style.borderWidth = this.divSize / 20 + "px";
         this.div.innerText = this.text;
-        this.div.style.width = this.height * 2 + "px";
-        this.div.style.height = this.height + "px";
+        this.div.style.width = this.divSize * 2 + "px";
+        this.div.style.height = this.divSize + "px";
         this.div.style.opacity = 0;
     }
 
@@ -49,32 +46,30 @@ class GameScore extends BaseDecoration{
 
     //здесь мы должны создать табличку, она выплывет на середину и заиграет музыка
 
-   showTable(){
-
-        if(this.enemyHealth < 0){
-            this.scoreAppearAnimation();
-            AudioHelper.getInstance().playScore();
-        }
-
+   showTable(text){
+        this.div.innerText = text;
+        this.scoreAppearAnimation();
+        AudioHelper.getInstance().playScore();
     }
-    scoreAppearAnimation(div){
 
-        let currentSize = -height;
 
-        let id = setInterval(function() {
-            if(currentSize < 0){
-                currentSize += 5;
-                div.style.bottom =  currentSize + "px";
+    scoreAppearAnimation(){
+
+
+        let opacity =  Number(this.div.style.opacity);
+
+        let id = setInterval(() => {
+            if(opacity < 10){
+                opacity += 1;
+                this.div.style.opacity = opacity / 10;
             }else {
                 clearInterval(id);
             }
-        }, 5);
+        }, 100);
 
     }
 
-    setText(text){
-        this.div.innerText = text;
-    }
+
 
 
 }

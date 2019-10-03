@@ -5,34 +5,45 @@
 document.addEventListener("DOMContentLoaded", function() {
 document.body.style.cursor = "url('images/smallTarget.png'), auto";
 
+
     let dictionary = {};
 
     let mainDiv = new Panorama().createMainDiv();
     let fantom = new Fantom(mainDiv, dictionary, "fantom");
         fantom.setMargins("50px", "50px");
 
-    let score = new GameScore(mainDiv, "You win!");
-    let border = score.height / 10;
-    let scoreHeight = score.height + border;
-        score.setMargins(0 + "px", (window.innerHeight - scoreHeight) + "px");
-        score.showTable();
+    let score = new GameScore(mainDiv, "");
+    let scoreTableMarginLeft = (window.innerWidth / 2) - score.divSize;
+    let scoreTableMarginTop = (window.innerHeight / 2) - (score.divSize / 2);
+        score.setMargins(scoreTableMarginLeft + "px", scoreTableMarginTop + "px");
 
+    let enemies = [ new DrunkJoy(mainDiv,dictionary,"drunker1"),
+                    new DrunkBill(mainDiv,dictionary,"drunker2"),
+                    new DrunkPhill(mainDiv,dictionary,"drunker3")];
 
-        let enemies1 = new DrunkJoy(mainDiv,dictionary,"drunker1");
-        let enemies2 = new DrunkBill(mainDiv,dictionary,"drunker2");
-        let enemies3 = new DrunkPhill(mainDiv,dictionary,"drunker3");
-
+    let enemiesCount = enemies.length;
 
         createCactus(window.innerHeight / 10, mainDiv, dictionary);
 
-
-
         appearTarget(mainDiv, dictionary, "gun",new HealthScore(mainDiv));
 
+        document.body.append(mainDiv);
 
+        document.addEventListener("dieEnemy", function(e) {
 
-    document.body.append(mainDiv);
+            enemiesCount -=1;
 
+            if(enemiesCount < 1){
+                score.showTable("enemies died");
+            }
+
+        });
+
+        document.addEventListener("dieGamer", function(e) {
+
+            enemies.forEach((element) => {element.didGameFinish()});
+            score.showTable("gamer died");
+        });
 });
 
 

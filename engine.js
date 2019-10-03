@@ -30,7 +30,7 @@ class Engine extends BaseDamagable {
 
         let arm = document.createElement("div");
             arm.style.display = "inlineBlock";
-            arm.style.backgroundImage = "url('images/Arm1.png')";
+            arm.style.backgroundImage = "url('images/arm.png')";
             arm.style.position = "fixed";
             arm.style.backgroundSize = "contain";
             arm.style.backgroundPosition = "center";
@@ -83,6 +83,8 @@ class Engine extends BaseDamagable {
 
         this.health = value < 0 ? 0 : value > 100 ? 100 : value;
         this.healthTable.setHealthValue(this.health);
+
+        if(this.health < 1){this.sendEventDie();}
     }
 
     preparedReloadGun(){
@@ -137,6 +139,16 @@ class Engine extends BaseDamagable {
     didDamage() {
         let newValue = this.health === 0 ? 0 : this.health - 10;
         this.changeHealthValue(newValue);
+    }
+
+    sendEventDie(){
+
+        let myEvent = new CustomEvent("dieGamer", {
+            detail: {
+                tag: this.div.tag
+            }
+        });
+        document.dispatchEvent(myEvent);
     }
 }
 
