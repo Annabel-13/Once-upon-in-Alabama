@@ -84,6 +84,6 @@ class AudioHelper {
 
 
     playDamageEnemy(){
-        this.play('sounds/ahhh.mp3');
+        this.play('sounds/scream.mp3');
     }
 }

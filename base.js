@@ -225,7 +225,7 @@ class BaseEnemy extends BaseDamagable{
       * it can be overwritten in child
     * */
     lookDie(){
-        this.div.style.backgroundImage = "url('images/gravestone.png')";
+        this.div.style.backgroundImage = "url('images/graveStone.png')";
         this.div.style.backgroundSize = "contain";
         this.div.style.display = "inlineBlock";
         this.div.style.backgroundPosition = "center";

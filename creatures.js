@@ -19,7 +19,7 @@ class DrunkJoy extends BaseEnemy{
 
 
     onDie(){
-        this.div.style.backgroundImage = "url('images/gravestone.png')";
+        this.div.style.backgroundImage = "url('images/graveStone.png')";
         this.div.style.backgroundSize = "contain";
         this.div.style.display = "inlineBlock";
         this.div.style.backgroundPosition = "center";
@@ -93,7 +93,7 @@ class DrunkPhill extends BaseEnemy{
     }
 
     lookRunning(){
-        this.div.style.backgroundImage = "url('images/Moon.png')";
+        this.div.style.backgroundImage = "url('images/drunkPhill2.png')";
         this.div.style.backgroundSize = "contain";
         this.div.style.display = "inlineBlock";
         this.div.style.backgroundPosition = "center";
