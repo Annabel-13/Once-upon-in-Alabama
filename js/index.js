@@ -8,14 +8,14 @@ document.body.style.cursor = "url('images/smallTarget.png'), auto";
 
     let dictionary = {};
 
-    let mainDiv = new Panorama().createMainDiv();
+    let mainDiv =  Panorama.createMainDiv();
     let fantom = new Fantom(mainDiv, dictionary, "fantom");
         fantom.setMargins("50px", "50px");
 
-    let score = new GameScore(mainDiv, "");
+    let score = new GameScore(mainDiv, "You die");
     let scoreTableMarginLeft = (window.innerWidth / 2) - score.divSize;
     let scoreTableMarginTop = (window.innerHeight / 2) - (score.divSize / 2);
-        score.setMargins(scoreTableMarginLeft + "px", scoreTableMarginTop + "px");
+        //score.setMargins(scoreTableMarginLeft + "px", scoreTableMarginTop + "px");
 
     let enemies = [ new DrunkJoy(mainDiv,dictionary,"drunker1"),
                     new DrunkBill(mainDiv,dictionary,"drunker2"),
