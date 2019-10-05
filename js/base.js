@@ -148,8 +148,6 @@ class BaseEnemy extends BaseDamagable{
                     }
 
                     this.bullets -= 1;
-                } else if(!this.isFinishedGame()){
-                    AudioHelper.getInstance().playEmptyGun();
                 }
 
                 if(shootingCount < 1){

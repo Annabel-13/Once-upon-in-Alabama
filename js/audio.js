@@ -36,11 +36,11 @@ class AudioHelper {
 
 
     play(sound){
-
-
-
-        this.pauseAudio();
+        //this.pauseAudio();
+        console.log(sound);
         this.audio.src = sound;
+
+
 
         this.audio.load();
 
