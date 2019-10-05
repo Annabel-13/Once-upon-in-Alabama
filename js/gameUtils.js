@@ -66,70 +66,36 @@ class Panorama {
 
 class HealthScore extends BaseDecoration{
 
-    height = 50;
-    width = 300;
+
     maxHealthValue = 100;
-    textDiv;
-    contentDiv;
 
     constructor(mainDiv) {
         super(mainDiv);
-        this.div.style.width = this.width + "px";
-        this.div.style.height =  this.height + "px";
-        this.div.style.fontSize = this.height / 2 + "px";
-        this.div.style.lineHeight = this.height + 'px';
-        this.textDiv = this.createTextDiv();
-        this.contentDiv = this.createContentDiv();
-        this.div.append(this.contentDiv);
-        this.div.append(this.textDiv);
-    }
 
-     createContentDiv(){
-         let contentDiv = document.createElement('div');
-             contentDiv.style.bottom = window.innerHeight / 10 + 20 + "px";
-             contentDiv.style.width = this.div.style.width;
-             contentDiv.style.height = this.div.style.height;
-             contentDiv.style.position = "fixed";
-             contentDiv.style.backgroundColor = "#f8ef48";
-             contentDiv.style.opacity = 0.6;
-             contentDiv.style.borderRadius = "33px";
-        return contentDiv;
-
-    }
-
-    createTextDiv(){
         let textDiv = document.createElement('div');
-            textDiv.style.bottom = window.innerHeight / 10 + 20 + "px";
-            textDiv.style.width = this.div.style.width;
-            textDiv.style.height = this.div.style.height;
-            textDiv.style.position = "fixed";
-            textDiv.innerText = "100%";
-            textDiv.style.borderRadius = "33px";
-        return textDiv;
+            textDiv.classList.add("healthScore-textDiv");
 
+        let contentDiv = document.createElement('div');
+            contentDiv.classList.add("healthScore-contentDiv");
+
+        this.div.append(contentDiv);
+        this.div.append(textDiv);
     }
+
 
     createChildDiv(){
         let healthScore = document.createElement('div');
-            healthScore.style.bottom = window.innerHeight / 10 + 10 + "px";
-            healthScore.style.right = 10 + "px";
-            healthScore.style.position = "fixed";
-            healthScore.style.borderStyle = "groove";
-            healthScore.style.borderWidth = 10 + "px";
-            healthScore.style.borderColor = "#f83837";
-            healthScore.style.textAlign = "center";
-            healthScore.style.fontFamily = "ryo";
-            healthScore.style.borderRadius = "33px";
+            healthScore.classList.add("healthScore");
         return healthScore;
 
     }
 
 
 
-    setHealthValue(currentHealthValue){
-        this.textDiv.innerText = currentHealthValue + "%";
-        this.contentDiv.style.width =  currentHealthValue * (this.width / this.maxHealthValue) + "px";
-        this.contentDiv.style.backgroundColor = currentHealthValue > 50 ? "#0ba754": currentHealthValue > 33 ? "#f8ef48" : "#f83837";
+    setHealthValue(currentHealthValue,textDiv, contentDiv){
+        textDiv.innerText = currentHealthValue + "%";
+        contentDiv.style.width =  currentHealthValue * (300 / this.maxHealthValue) + "px";
+        contentDiv.style.backgroundColor = currentHealthValue > 50 ? "#0ba754": currentHealthValue > 33 ? "#f8ef48" : "#f83837";
     }
 
 

@@ -32,5 +32,40 @@
     border-width: 10px;
     width: 400px;
     height: 200px;
-    /*opacity: 0;*/
+    opacity: 0;
+}
+
+.healthScore-contentDiv{
+    bottom: 16%;
+    width: 300px;
+    height: 50px;
+    position: fixed;
+    background-color: #f8ef48;
+    opacity: 0.6;
+    border-radius: 33px;
+    font-size: 25px;
+    line-height: 50px;
+}
+
+.healthScore-textDiv{
+    bottom: 15%;
+    /*width: 300px;
+    height: 50px;*/
+    position: fixed;
+    font-size: 25px;
+    border-radius: 33px;
+}
+
+.healthScore{
+    width: 300px;
+    height: 50px;
+    bottom: 15%;
+    right: 10px;
+    position: fixed;
+    border-style: groove;
+    border-width: 10px;
+    border-color: #f83837;
+    text-align: center;
+    font-family: URW Chancery L, cursive;
+    border-radius: 33px;
 }
