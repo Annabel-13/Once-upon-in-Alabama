@@ -1,0 +1,20 @@
+.fantom{
+    width: 200px;
+    height:  200px;
+    display: inline-block;
+    position: fixed;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.cactus{
+    width: 200px;
+    height: 300px;
+    display: inline-block;
+    position: fixed;
+    background-size: auto;
+    background-position: bottom;
+    background-repeat: no-repeat;
+
+}

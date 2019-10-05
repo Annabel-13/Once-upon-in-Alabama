@@ -1,0 +1,6 @@
+.baseEnemy{
+    bottom: 20px;
+    position: fixed;
+    width: 200px;
+    height: 400px;
+}

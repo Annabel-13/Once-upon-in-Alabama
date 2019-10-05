@@ -74,7 +74,6 @@ class BaseEnemy extends BaseDamagable{
 
 
     enemyHealth = 100;
-    size = 200;
     bullets = 6;
     positionX = getRandValue(window.innerWidth, window.innerWidth / 3);
     path = 8;
@@ -88,19 +87,20 @@ class BaseEnemy extends BaseDamagable{
 
     constructor(mainDiv, dictionary,tag) {
         super(mainDiv, dictionary,tag);
-        this.div.style.width = this.size + "px";
-        this.div.style.height = 2 * this.size + "px";
         this.div.style.left = this.positionX + "px";
     }
 
     createChildDiv() {
         let baseEnemy = document.createElement('div');
-            baseEnemy.style.bottom = 20 + "px";
-            baseEnemy.style.position = "fixed";
+            baseEnemy.classList.add("baseEnemy");
         return baseEnemy;
     }
 
     setMargins(screenSize) {}
+
+    getEngineSize(){
+        return this.div.clientWidth ;
+    }
 
     startUp(){
         this.id = setInterval(() => {
@@ -112,7 +112,6 @@ class BaseEnemy extends BaseDamagable{
                 this.lookDie();
                 this.sendEventDie();
                 this.onDie();
-                console.log("I am dead " + this.div.tag);
                 clearInterval(this.id);
             }
         }, 1000);
@@ -134,16 +133,17 @@ class BaseEnemy extends BaseDamagable{
                 if(this.bullets > 0 && this.enemyHealth > 0 && this.isFinishedGame === false){
                     AudioHelper.getInstance().playShotEnemy();
                     let engine = this.dictionary["gun"];
-                    console.log("здоровье врага: " + this.enemyHealth);
 
-                    let divLeft = engine.div.style.left;
-                    let startX = Number(divLeft.substring(0, divLeft.length - 2));
+                    let divLeftPosition = engine.div.style.left;
+                    let startX = Number(divLeftPosition.substring(0, divLeftPosition.length - 2));
+                    let endX = startX + this.getEngineSize();
 
                     let minRand = startX - this.accuracy;
-                    let maxRand = startX + engine.size + this.accuracy;
+                    let maxRand = endX + this.accuracy;
+
                     let shootCoord = getRandValue(minRand, maxRand );
 
-                    if(shootCoord >= startX && shootCoord <= startX + engine.size){
+                    if(shootCoord >= startX && shootCoord <= startX + this.getEngineSize()){
                         engine.didDamage();
                     }
 
@@ -189,7 +189,7 @@ class BaseEnemy extends BaseDamagable{
 
 
             if(distance > 0 && this.enemyHealth > 0 && this.isFinishedGame === false){
-                let allowRight = (this.positionX  + this.size + this.path)  < window.innerWidth;
+                let allowRight = (this.positionX  + this.getEngineSize() + this.path)  < window.innerWidth;
                 let allowLeft = (this.positionX - this.path) > 0;
 
                 if(direction === 0 && !allowRight){

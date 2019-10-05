@@ -68,18 +68,21 @@ class HealthScore extends BaseDecoration{
 
 
     maxHealthValue = 100;
+    textDiv;
+    contentDiv;
 
     constructor(mainDiv) {
         super(mainDiv);
 
-        let textDiv = document.createElement('div');
-            textDiv.classList.add("healthScore-textDiv");
+        this.textDiv = document.createElement('div');
+        this.textDiv.classList.add("healthScore-textDiv");
+        this.textDiv.innerText = this.maxHealthValue + "%";
 
-        let contentDiv = document.createElement('div');
-            contentDiv.classList.add("healthScore-contentDiv");
+        this.contentDiv = document.createElement('div');
+        this.contentDiv.classList.add("healthScore-contentDiv");
 
-        this.div.append(contentDiv);
-        this.div.append(textDiv);
+        this.div.append(this.contentDiv);
+        this.div.append(this.textDiv);
     }
 
 
@@ -92,10 +95,10 @@ class HealthScore extends BaseDecoration{
 
 
 
-    setHealthValue(currentHealthValue,textDiv, contentDiv){
-        textDiv.innerText = currentHealthValue + "%";
-        contentDiv.style.width =  currentHealthValue * (300 / this.maxHealthValue) + "px";
-        contentDiv.style.backgroundColor = currentHealthValue > 50 ? "#0ba754": currentHealthValue > 33 ? "#f8ef48" : "#f83837";
+    setHealthValue(currentHealthValue){
+        this.textDiv.innerText = currentHealthValue + "%";
+        this.contentDiv.style.width =  currentHealthValue * (300 / this.maxHealthValue) + "px";
+        this.contentDiv.style.backgroundColor = currentHealthValue > 50 ? "#0ba754": currentHealthValue > 33 ? "#f8ef48" : "#f83837";
     }
 
 

@@ -1,0 +1,10 @@
+.engine{
+    display: inline-block;
+    background-image: url('../images/arm.png');
+    position: fixed;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 250px;
+    height: 300px;
+}

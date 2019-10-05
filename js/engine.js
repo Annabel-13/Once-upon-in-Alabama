@@ -1,18 +1,7 @@
-/*
-* создать хелс, передать инстанс хелстейбл,
-* *переименовать ган в енджайн +
-наследоваться от демеджейбла +
-*
-*
-*
-*
-*
-* */
 class Engine extends BaseDamagable {
 
 
     bullets = 666;
-    size = 300;
     isLoading = false;
     health = 100;
     healthTable;
@@ -22,19 +11,11 @@ class Engine extends BaseDamagable {
     constructor(mainDiv, dictionary,tag,healthTable) {
         super(mainDiv, dictionary,tag);
         this.healthTable = healthTable;
-        this.div.style.width = this.size - 50 + "px";
-        this.div.style.height = this.size + "px";
     }
 
     createChildDiv() {
-
         let arm = document.createElement("div");
-            arm.style.display = "inlineBlock";
-            arm.style.backgroundImage = "url('images/arm.png')";
-            arm.style.position = "fixed";
-            arm.style.backgroundSize = "contain";
-            arm.style.backgroundPosition = "center";
-            arm.style.backgroundRepeat = "no-repeat";
+            arm.classList.add("engine");
         return arm;
     }
 

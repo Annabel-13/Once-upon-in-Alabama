@@ -1,6 +1,6 @@
 
 
-//draw moon
+//draw bat
 class Fantom extends BaseDamagable{
 
     health = 100;
@@ -18,16 +18,8 @@ class Fantom extends BaseDamagable{
 
 
     createChildDiv(){
-        let size = 200;
         let fantom = document.createElement("div");
-            fantom.style.width = size + "px";
-            fantom.style.height =  size + "px";
-            fantom.style.display = "inlineBlock";
-            fantom.style.position = "fixed";
-            fantom.style.backgroundSize = "contain";
-            fantom.style.backgroundPosition = "center";
-            fantom.style.backgroundRepeat = "no-repeat";
-
+            fantom.classList.add("fantom");
         return fantom;
     }
 
@@ -52,18 +44,8 @@ class Cactus extends BaseDamagable{
     }
 
     createChildDiv(){
-        let width = 200;
-        let height = 300;
-            let cactus = document.createElement('div');
-            cactus.style.width = width + "px";
-            cactus.style.height = height + "px";
-            cactus.style.display = "inline-block";
-            cactus.style.position = "fixed";
-            cactus.style.backgroundSize = "auto";
-            cactus.style.backgroundPosition = "bottom";
-            cactus.style.backgroundRepeat = "no-repeat";
-            //cactus.style.cssFloat = "left";
-
+        let cactus = document.createElement('div');
+            cactus.classList.add("cactus");
         return cactus;
     }
 
