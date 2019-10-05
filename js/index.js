@@ -15,9 +15,11 @@ document.body.style.cursor = "url('images/smallTarget.png'), auto";
     let score = new GameScore(mainDiv, "Test text");
         score.setMargins();
 
-    let enemies = [ new DrunkJoy(mainDiv,dictionary,"drunker1"),
-                    new DrunkBill(mainDiv,dictionary,"drunker2"),
-                    new DrunkPhill(mainDiv,dictionary,"drunker3")];
+    let enemies = [
+         new DrunkJoy(mainDiv,dictionary,"drunker1"),
+         new DrunkBill(mainDiv,dictionary,"drunker2"),
+         new DrunkPhill(mainDiv,dictionary,"drunker3")
+    ];
 
     let enemiesCount = enemies.length;
 

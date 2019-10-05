@@ -231,11 +231,11 @@ class BaseEnemy extends BaseDamagable{
     }
 
     lookRunning(){
-        this.div.style.backgroundImage = "url('images/enemy.png')";
+        this.div.style.backgroundImage = "url('images/moon.png')";
     }
 
     lookWaiting(){
-        this.div.style.backgroundImage = "url('images/wait.png')";
+        this.div.style.backgroundImage = "url('images/bat.png')";
     }
 
 

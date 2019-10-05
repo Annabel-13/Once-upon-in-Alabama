@@ -28,6 +28,14 @@ class DrunkJoy extends BaseEnemy{
         AudioHelper.getInstance().playDie();
     }
 
+    lookRunning(){
+        this.div.style.backgroundImage = "url('images/Joy.png')";
+    }
+
+    lookWaiting(){
+        this.div.style.backgroundImage = "url('images/Joy.png')";
+    }
+
 }
 
 class DrunkBill extends BaseEnemy{
@@ -44,17 +52,28 @@ class DrunkBill extends BaseEnemy{
         AudioHelper.getInstance().playReload();
     }
 
-    onDamage(){
+    onDamage() {
         AudioHelper.getInstance().playDamageEnemy();
         console.log(this.enemyHealth);
     }
 
+    lookWaiting(){
+        this.div.style.backgroundImage = "url('images/bill.png')";
+    }
+
+    lookRunning(){
+        this.div.style.backgroundImage = "url('images/bill.png')";
+    }
 
     onDie(){
         AudioHelper.getInstance().playDie();
     }
-
 }
+
+
+
+
+
 
 
 class DrunkPhill extends BaseEnemy{
@@ -83,16 +102,14 @@ class DrunkPhill extends BaseEnemy{
       *
       * it can be overwritten in child
     * */
-    lookDie(){
-        this.div.style.backgroundImage = "url('images/cact1.png')";
-    }
+
 
     lookRunning(){
-        this.div.style.backgroundImage = "url('images/drunkPhill2.png')";
+        this.div.style.backgroundImage = "url('images/phill.png')";
     }
 
     lookWaiting(){
-        this.div.style.backgroundImage = "url('images/bat.png')";
+        this.div.style.backgroundImage = "url('images/phill.png')";
     }
 
 
