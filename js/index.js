@@ -26,7 +26,12 @@ document.body.style.cursor = "url('images/smallTarget.png'), auto";
 
         createCactus(window.innerHeight / 10, mainDiv, dictionary);
 
-        appearTarget(mainDiv, dictionary, "gun",new HealthScore(mainDiv));
+
+    let engine = new Engine(mainDiv, dictionary, "gun",new HealthScore(mainDiv));
+        engine.setMargins(window.innerWidth);
+        engine.moveGun(document);
+        engine.preparedGun(dictionary);
+        engine.preparedReloadGun();
 
         document.body.append(mainDiv);
 
@@ -45,6 +50,7 @@ document.body.style.cursor = "url('images/smallTarget.png'), auto";
         });
 
         document.addEventListener("dieGamer", function(e) {
+            engine.div.style.opacity = 0;
             enemies.forEach((element) => {element.didGameFinish()});
             score.showTable("gamer died");
             AudioHelper.getInstance().playScore();

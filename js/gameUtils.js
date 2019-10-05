@@ -13,14 +13,7 @@ function createCactus(maxValue, mainDiv, dictionary) {
 
 
 
-    }}
-
-function appearTarget(mainDiv, dictionary,tag, healthTable){
-    let engine = new Engine(mainDiv, dictionary, tag, healthTable);
-    engine.setMargins(window.innerWidth);
-    engine.moveGun(document);
-    engine.preparedGun(dictionary);
-    engine.preparedReloadGun();
+    }
 }
 
 

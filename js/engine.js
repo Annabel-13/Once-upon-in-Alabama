@@ -1,7 +1,7 @@
 class Engine extends BaseDamagable {
 
 
-    bullets = 666;
+    bullets = 6;
     isLoading = false;
     health = 100;
     healthTable;
