@@ -36,8 +36,12 @@ class AudioHelper {
 
 
     play(sound){
+
+
+
         this.pauseAudio();
         this.audio.src = sound;
+
         this.audio.load();
 
 

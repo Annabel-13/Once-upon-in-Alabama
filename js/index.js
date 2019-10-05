@@ -15,10 +15,11 @@ document.body.style.cursor = "url('images/smallTarget.png'), auto";
     let score = new GameScore(mainDiv, "Test text");
         score.setMargins();
 
+
     let enemies = [
-         new DrunkJoy(mainDiv,dictionary,"drunker1"),
-         new DrunkBill(mainDiv,dictionary,"drunker2"),
-         new DrunkPhill(mainDiv,dictionary,"drunker3")
+        new DrunkJoy(mainDiv,dictionary,"drunker1"),
+        new DrunkBill(mainDiv,dictionary,"drunker2"),
+        new DrunkPhill(mainDiv,dictionary,"drunker3")
     ];
 
     let enemiesCount = enemies.length;
@@ -29,22 +30,32 @@ document.body.style.cursor = "url('images/smallTarget.png'), auto";
 
         document.body.append(mainDiv);
 
+
+
+
+        score.showTable("Click on Enter to start game!");
+
+
         document.addEventListener("dieEnemy", function(e) {
-
             enemiesCount -=1;
-
             if(enemiesCount < 1){
                 score.showTable("all enemies is died");
+                AudioHelper.getInstance().playScore();
             }
-
         });
 
         document.addEventListener("dieGamer", function(e) {
-
             enemies.forEach((element) => {element.didGameFinish()});
             score.showTable("gamer died");
+            AudioHelper.getInstance().playScore();
+        });
+
+        document.addEventListener("startGame", function(e) {
+            score.hideTable();
+            enemies.forEach((enemy) => {enemy.startUp(100);});
         });
 });
+
 
 
 

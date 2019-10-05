@@ -25,9 +25,12 @@ class GameScore extends BaseDecoration{
    showTable(text){
         this.div.innerText = text;
         this.scoreAppearAnimation();
-        AudioHelper.getInstance().playScore();
     }
 
+
+    hideTable(){
+        this.div.style.opacity = 0;
+    }
 
     scoreAppearAnimation(){
 

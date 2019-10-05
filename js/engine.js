@@ -1,7 +1,7 @@
 class Engine extends BaseDamagable {
 
 
-    bullets = 6;
+    bullets = 666;
     isLoading = false;
     health = 100;
     healthTable;
@@ -60,11 +60,10 @@ class Engine extends BaseDamagable {
     }
 
     changeHealthValue(value){
+         this.health = value < 0 ? 0 : value > 100 ? 100 : value;
+         this.healthTable.setHealthValue(this.health);
 
-        this.health = value < 0 ? 0 : value > 100 ? 100 : value;
-        this.healthTable.setHealthValue(this.health);
-
-        if(this.health < 1){this.sendEventDie();}
+         if(this.health < 1){this.sendEventDie();}
     }
 
     preparedReloadGun(){
@@ -79,6 +78,11 @@ class Engine extends BaseDamagable {
                         this.gunAppearAnimation(this.div.clientWidth, this.div, this.isLoading);
                         this.isLoading = false;
                     }, 2000);
+                }else if(ev.code === "Enter"){
+                    let myEvent = new CustomEvent("startGame", {
+                        detail: {}
+                    });
+                    document.dispatchEvent(myEvent);
                 }
         }
     }

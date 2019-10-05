@@ -4,7 +4,6 @@ class DrunkJoy extends BaseEnemy{
 
     constructor(mainDiv, dictionary,tag) {
         super(mainDiv, dictionary,tag);
-        this.startUp(100);
     }
 
 
@@ -14,7 +13,6 @@ class DrunkJoy extends BaseEnemy{
 
     onDamage(){
         AudioHelper.getInstance().playDamageEnemy();
-        console.log(this.enemyHealth);
     }
 
 
@@ -39,7 +37,6 @@ class DrunkBill extends BaseEnemy{
 
     constructor(mainDiv, dictionary,tag) {
         super(mainDiv, dictionary,tag);
-        this.startUp(100);
     }
 
 
@@ -77,7 +74,6 @@ class DrunkPhill extends BaseEnemy{
 
     constructor(mainDiv, dictionary,tag) {
         super(mainDiv, dictionary,tag);
-        this.startUp(100);
     }
 
 
