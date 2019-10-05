@@ -106,9 +106,11 @@ class BaseEnemy extends BaseDamagable{
                 this.makeRun();
             } else{
                 AudioHelper.getInstance().stop();
-                this.lookDie();
-                this.sendEventDie();
-                this.onDie();
+                if(this.enemyHealth < 1){
+                    this.lookDie();
+                    this.sendEventDie();
+                    this.onDie();
+                }
                 clearInterval(this.id);
             }
         }, 1000);
@@ -119,8 +121,6 @@ class BaseEnemy extends BaseDamagable{
     }
 
     makeShoot(){
-
-        if(!this.isFinishedShoot || this.enemyHealth < 1)return;
 
 
         this.isFinishedShoot = false;
@@ -148,7 +148,7 @@ class BaseEnemy extends BaseDamagable{
                     }
 
                     this.bullets -= 1;
-                } else {
+                } else if(!this.isFinishedGame()){
                     AudioHelper.getInstance().playEmptyGun();
                 }
 
@@ -169,7 +169,7 @@ class BaseEnemy extends BaseDamagable{
         setTimeout(()=> {
             this.bullets = 6;
             this.isOnReload = false;
-        }, 5000);
+        }, 1500);
     }
 
 
@@ -226,7 +226,7 @@ class BaseEnemy extends BaseDamagable{
     * */
     lookDie(){
         this.div.style.backgroundImage = "url('images/graveStone.png')";
-        this.div.style.bottom = -20 + "px";
+        this.div.style.bottom = "-20px";
 
     }
 

@@ -1,7 +1,7 @@
 class Engine extends BaseDamagable {
 
 
-    bullets = 666;
+    bullets = 6;
     isLoading = false;
     health = 100;
     healthTable;
@@ -20,8 +20,7 @@ class Engine extends BaseDamagable {
     }
 
     setMargins(screenSize) {
-        this.div.style.bottom = "-80px";
-        this.div.style.left = (screenSize / 2) - (this.size / 2) + "px";
+        this.div.style.left = (screenSize / 2) - (this.div.clientWidth / 2) + "px";
     }
 
     moveGun(document) {
@@ -74,12 +73,12 @@ class Engine extends BaseDamagable {
 
                 if (ev.code === "KeyR" && this.isLoading === false) {
                     this.isLoading = true;
-                    this.gunDisappearAnimation(this.size, this.div,this.bullets);
+                    this.gunDisappearAnimation(this.div.clientWidth * 2, this.div,this.bullets);
                     setTimeout(()=> {
                         this.bullets = 6;
-                        this.gunAppearAnimation(this.size, this.div, this.isLoading);
+                        this.gunAppearAnimation(this.div.clientWidth, this.div, this.isLoading);
                         this.isLoading = false;
-                    }, 5000);
+                    }, 2000);
                 }
         }
     }

@@ -66,12 +66,12 @@ class AudioHelper {
 
 
     playReload(){
-        this.play('sounds/reload.mp3');
+        this.play('sounds/test.mp3');
     }
 
 
     playReloadEnemy(){
-        this.play('sounds/perezaryadka-orujiya.mp3');
+        this.play('sounds/test.mp3');
     }
 
     playScore(){

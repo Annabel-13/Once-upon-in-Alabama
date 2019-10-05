@@ -1,6 +1,6 @@
 class DrunkJoy extends BaseEnemy{
 
-    accuracy = 10;
+    accuracy = 1000;
 
     constructor(mainDiv, dictionary,tag) {
         super(mainDiv, dictionary,tag);
@@ -20,11 +20,6 @@ class DrunkJoy extends BaseEnemy{
 
     onDie(){
         this.div.style.backgroundImage = "url('images/graveStone.png')";
-        this.div.style.backgroundSize = "contain";
-        this.div.style.display = "inlineBlock";
-        this.div.style.backgroundPosition = "center";
-        this.div.style.backgroundRepeat = "no-repeat";
-        this.div.style.bottom = -20 + "px";
         AudioHelper.getInstance().playDie();
     }
 
@@ -40,7 +35,7 @@ class DrunkJoy extends BaseEnemy{
 
 class DrunkBill extends BaseEnemy{
 
-    accuracy = 30;
+    accuracy = 300;
 
     constructor(mainDiv, dictionary,tag) {
         super(mainDiv, dictionary,tag);
@@ -78,7 +73,7 @@ class DrunkBill extends BaseEnemy{
 
 class DrunkPhill extends BaseEnemy{
 
-    accuracy = 40;
+    accuracy = 100;
 
     constructor(mainDiv, dictionary,tag) {
         super(mainDiv, dictionary,tag);
