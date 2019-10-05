@@ -5,14 +5,12 @@ class GameScore extends BaseDecoration{
 
     constructor(mainDiv, text) {
         super(mainDiv);
-      /*  this.div.innerText = text;*/
-
+        this.div.innerText = text;
     }
 
-    setMargins(leftMargin, bottomMargin){
-        this.div.style.bottom = window.innerHeight/ 2 + "px";
-        this.div.style.left =  window.innerWidth / 2 + "px";
-        console.log("find div " + this.div.tag);
+    setMargins(){
+        this.div.style.bottom = (window.innerHeight/ 2) - 100 + "px";
+        this.div.style.left =  (window.innerWidth / 2) - 200 + "px";
     }
 
 
@@ -25,7 +23,7 @@ class GameScore extends BaseDecoration{
 
     //здесь мы должны создать табличку, она выплывет на середину и заиграет музыка
    showTable(text){
-      /*  this.div.innerText = text;*/
+        this.div.innerText = text;
         this.scoreAppearAnimation();
         AudioHelper.getInstance().playScore();
     }

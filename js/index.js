@@ -12,10 +12,8 @@ document.body.style.cursor = "url('images/smallTarget.png'), auto";
     let fantom = new Fantom(mainDiv, dictionary, "fantom");
         fantom.setMargins("50px", "50px");
 
-    let score = new GameScore(mainDiv, "You die");
-    let scoreTableMarginLeft = (window.innerWidth / 2) - score.divSize;
-    let scoreTableMarginTop = (window.innerHeight / 2) - (score.divSize / 2);
-        //score.setMargins(scoreTableMarginLeft + "px", scoreTableMarginTop + "px");
+    let score = new GameScore(mainDiv, "Test text");
+        score.setMargins();
 
     let enemies = [ new DrunkJoy(mainDiv,dictionary,"drunker1"),
                     new DrunkBill(mainDiv,dictionary,"drunker2"),

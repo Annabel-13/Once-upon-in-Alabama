@@ -20,18 +20,17 @@
 }
 
 .gameScore {
-    /*position: fixed;*/
+    position: fixed;
     text-align: center;
-   /* font-family: URW Chancery L, cursive;*/
+    font-family: URW Chancery L, cursive;
     background-color: #d89548;
-  /*  text-decoration-color: #8b4a46;*/
+    color: #f9f6ff;
     border-color: #8d4731;
-   /* line-height: 200;*/
+    line-height: 200px;
     border-style: dashed;
- /*   font-size: 25%;*/
+    font-size: 50px;
     border-width: 10px;
     width: 400px;
     height: 200px;
-    position: center;
     /*opacity: 0;*/
 }
