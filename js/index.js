@@ -32,7 +32,7 @@ document.body.style.cursor = "url('images/smallTarget.png'), auto";
             enemiesCount -=1;
 
             if(enemiesCount < 1){
-                score.showTable("enemies died");
+                score.showTable("all enemies is died");
             }
 
         });

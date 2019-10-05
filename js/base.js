@@ -79,7 +79,7 @@ class BaseEnemy extends BaseDamagable{
     path = 8;
     isFinishedRun = true;
     isFinishedShoot = true;
-    isFinishedGame = false;
+    gameWasFinished = false;
     isOnReload = false;
     id;
     accuracy = 100;
@@ -98,13 +98,10 @@ class BaseEnemy extends BaseDamagable{
 
     setMargins(screenSize) {}
 
-    getEngineSize(){
-        return this.div.clientWidth ;
-    }
 
     startUp(){
         this.id = setInterval(() => {
-            if(this.enemyHealth > 0 && this.isFinishedGame === false){
+            if(!this.isFinishedGame()){
                 this.bullets > 0 ? this.makeShoot() : this.makeReload();
                 this.makeRun();
             } else{
@@ -117,6 +114,9 @@ class BaseEnemy extends BaseDamagable{
         }, 1000);
     }
 
+    isFinishedGame(){
+        return this.enemyHealth < 1 || this.gameWasFinished === true;
+    }
 
     makeShoot(){
 
@@ -130,20 +130,20 @@ class BaseEnemy extends BaseDamagable{
 
             let id = setInterval(() => {
 
-                if(this.bullets > 0 && this.enemyHealth > 0 && this.isFinishedGame === false){
+                if(this.bullets > 0 && !this.isFinishedGame()){
                     AudioHelper.getInstance().playShotEnemy();
                     let engine = this.dictionary["gun"];
 
                     let divLeftPosition = engine.div.style.left;
                     let startX = Number(divLeftPosition.substring(0, divLeftPosition.length - 2));
-                    let endX = startX + this.getEngineSize();
+                    let endX = startX + this.div.clientWidth;
 
                     let minRand = startX - this.accuracy;
                     let maxRand = endX + this.accuracy;
 
                     let shootCoord = getRandValue(minRand, maxRand );
 
-                    if(shootCoord >= startX && shootCoord <= startX + this.getEngineSize()){
+                    if(shootCoord >= startX && shootCoord <= startX + this.div.clientWidth){
                         engine.didDamage();
                     }
 
@@ -162,7 +162,7 @@ class BaseEnemy extends BaseDamagable{
     }
 
     makeReload(){
-        if(this.isOnReload || this.enemyHealth < 1 || this.isFinishedGame === true) return;
+        if(this.isOnReload || this.isFinishedGame()) return;
             this.isOnReload = true;
 
         AudioHelper.getInstance().playReloadEnemy();
@@ -188,8 +188,8 @@ class BaseEnemy extends BaseDamagable{
         let id = setInterval(() => {
 
 
-            if(distance > 0 && this.enemyHealth > 0 && this.isFinishedGame === false){
-                let allowRight = (this.positionX  + this.getEngineSize() + this.path)  < window.innerWidth;
+            if(distance > 0 && !this.isFinishedGame()){
+                let allowRight = (this.positionX  + this.div.clientWidth + this.path)  < window.innerWidth;
                 let allowLeft = (this.positionX - this.path) > 0;
 
                 if(direction === 0 && !allowRight){
@@ -226,27 +226,18 @@ class BaseEnemy extends BaseDamagable{
     * */
     lookDie(){
         this.div.style.backgroundImage = "url('images/graveStone.png')";
-        this.div.style.backgroundSize = "contain";
-        this.div.style.display = "inlineBlock";
-        this.div.style.backgroundPosition = "center";
-        this.div.style.backgroundRepeat = "no-repeat";
-        this.div.style.bottom = -20 + "px";
+        this.div.classList.add("lookDie");
+
     }
 
     lookRunning(){
         this.div.style.backgroundImage = "url('images/enemy.png')";
-        this.div.style.backgroundSize = "contain";
-        this.div.style.display = "inlineBlock";
-        this.div.style.backgroundPosition = "center";
-        this.div.style.backgroundRepeat = "no-repeat";
+        this.div.classList.add("lookRunning");
     }
 
     lookWaiting(){
         this.div.style.backgroundImage = "url('images/wait.png')";
-        this.div.style.backgroundSize = "contain";
-        this.div.style.display = "inlineBlock";
-        this.div.style.backgroundPosition = "center";
-        this.div.style.backgroundRepeat = "no-repeat";
+        this.div.classList.add("lookWaiting");
     }
 
 
@@ -278,7 +269,7 @@ class BaseEnemy extends BaseDamagable{
     }
 
     didGameFinish(){
-        this.isFinishedGame = true;
+        this.gameWasFinished = true;
     }
 
     onReload(){
