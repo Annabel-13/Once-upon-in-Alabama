@@ -3,26 +3,10 @@
     position: fixed;
     width: 200px;
     height: 400px;
-}
-
-.lookDie{
-    background-size: contain;
-    display: inline-block;
-    background-position: center;
-    background-repeat: no-repeat;
-    bottom: -20px;
-}
-
-.lookRunning{
     background-size: contain;
     display: inline-block;
     background-position: center;
     background-repeat: no-repeat;
 }
 
-.lookWaiting{
-    background-size: contain;
-    display: inline-block;
-    background-position: center;
-    background-repeat: no-repeat;
-}
+

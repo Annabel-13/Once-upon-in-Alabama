@@ -226,18 +226,16 @@ class BaseEnemy extends BaseDamagable{
     * */
     lookDie(){
         this.div.style.backgroundImage = "url('images/graveStone.png')";
-        this.div.classList.add("lookDie");
+        this.div.style.bottom = -20 + "px";
 
     }
 
     lookRunning(){
         this.div.style.backgroundImage = "url('images/enemy.png')";
-        this.div.classList.add("lookRunning");
     }
 
     lookWaiting(){
         this.div.style.backgroundImage = "url('images/wait.png')";
-        this.div.classList.add("lookWaiting");
     }
 
 

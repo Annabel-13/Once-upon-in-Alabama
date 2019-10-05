@@ -85,27 +85,14 @@ class DrunkPhill extends BaseEnemy{
     * */
     lookDie(){
         this.div.style.backgroundImage = "url('images/cact1.png')";
-        this.div.style.backgroundSize = "contain";
-        this.div.style.display = "inlineBlock";
-        this.div.style.backgroundPosition = "center";
-        this.div.style.backgroundRepeat = "no-repeat";
-        this.div.style.bottom = -20 + "px";
     }
 
     lookRunning(){
         this.div.style.backgroundImage = "url('images/drunkPhill2.png')";
-        this.div.style.backgroundSize = "contain";
-        this.div.style.display = "inlineBlock";
-        this.div.style.backgroundPosition = "center";
-        this.div.style.backgroundRepeat = "no-repeat";
     }
 
     lookWaiting(){
         this.div.style.backgroundImage = "url('images/bat.png')";
-        this.div.style.backgroundSize = "contain";
-        this.div.style.display = "inlineBlock";
-        this.div.style.backgroundPosition = "center";
-        this.div.style.backgroundRepeat = "no-repeat";
     }
 
 
