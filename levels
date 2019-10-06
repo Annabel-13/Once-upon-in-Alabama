@@ -1,0 +1,30 @@
+
+
+//
+// /*
+//     this is enter point
+// */
+// document.addEventListener("DOMContentLoaded", function() {
+//     document.body.style.cursor = "url('images/smallTarget.png'), auto";
+//
+//
+//     let levels = [Level1, Level2, level3]
+//     let index = 0;
+//     startLevel()
+//
+// });
+//
+// function startLevel() {
+//     if(index < levels.count)
+//
+//     let level = levels[index];
+//         level.startUp()
+//         level.onEnd = () => {
+//             this.index +=1;
+//             startLevel()
+//         }
+//
+//         else{
+//             alert("game over")
+//     }
+// }

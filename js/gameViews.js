@@ -56,13 +56,26 @@ class GameScore extends BaseDecoration{
 //getGroundHeight = () => { return window.innerHeight / 10; };
 class Panorama {
 
-    static createMainDiv() {
+    panoramaBackgroundColor;
+    panoramaBackgroundImage;
+    groundColor;
+
+    constructor(panoramaBackgroundColor, panoramaBackgroundImage, groundColor){
+        this.groundColor = groundColor;
+        this.panoramaBackgroundImage = panoramaBackgroundImage;
+        this.panoramaBackgroundColor = panoramaBackgroundColor;
+    }
+
+    createMainDiv() {
         let ground = document.createElement('div');
             ground.classList.add("ground");
+            ground.style.backgroundColor = this.groundColor;
 
         let mainDiv = document.createElement('div');
             mainDiv.classList.add("panorama");
             mainDiv.appendChild(ground);
+            mainDiv.style.backgroundColor = this.panoramaBackgroundColor;
+            mainDiv.style.backgroundImage = this.panoramaBackgroundImage;
         return mainDiv;
     }
 }
@@ -104,6 +117,62 @@ class HealthScore extends BaseDecoration{
         this.contentDiv.style.backgroundColor = currentHealthValue > 50 ? "#0ba754": currentHealthValue > 33 ? "#f8ef48" : "#f83837";
     }
 
+
+}
+
+class Arm extends BaseDamagable{
+
+
+
+
+    constructor(mainDiv, dictionary,tag) {
+        super(mainDiv, dictionary,tag);
+    }
+
+    createChildDiv() {
+        let arm = document.createElement("div");
+            arm.classList.add("engine");
+        return arm;
+    }
+
+    setMargins(screenSize) {
+        this.div.style.left = (screenSize / 2) - (this.div.clientWidth / 2) + "px";
+    }
+
+    gunDisappearAnimation(size,div,bullets){
+
+        if(bullets < 1){
+
+            let currentSize = 0;
+
+            let id = setInterval(function () {
+                if(currentSize > -size){
+                    currentSize -= 5;
+                    div.style.bottom = currentSize + "px";
+                }else {
+                    AudioHelper.getInstance().playReload();
+                    clearInterval(id);
+                }
+            }, 5);
+        }
+    }
+
+    gunAppearAnimation(size,div){
+
+        let currentSize = -size;
+
+        let id = setInterval(function () {
+            if(currentSize < 0){
+                currentSize += 5;
+                div.style.bottom =  currentSize - 20 + "px";
+            }else {
+                clearInterval(id);
+            }
+        }, 5);
+
+    }
+
+    didDamage(){}
 
 }
 

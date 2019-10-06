@@ -1,54 +1,50 @@
-class Engine extends BaseDamagable {
+class Engine {
 
 
     bullets = 6;
     isLoading = false;
     health = 100;
     healthTable;
+    arm;
 
 
-
-    constructor(mainDiv, dictionary,tag,healthTable) {
-        super(mainDiv, dictionary,tag);
-        this.healthTable = healthTable;
+    setArmDiv(div){
+        this.arm = div;
     }
 
-    createChildDiv() {
-        let arm = document.createElement("div");
-            arm.classList.add("engine");
-        return arm;
+
+    setHealthTable(div){
+        this.healthTable = div;
     }
 
-    setMargins(screenSize) {
-        this.div.style.left = (screenSize / 2) - (this.div.clientWidth / 2) + "px";
-    }
 
-    moveGun(document) {
-
+    observeMouseOver() {
         let onMouseUpdate = (ev) => {
-            this.div.style.left = ev.pageX + 70 + "px";
+            if(this.arm !== undefined){
+               this.arm.div.style.left = ev.pageX + 70 + "px";
+            }
         };
 
         document.addEventListener("mousemove", onMouseUpdate, false);
         document.addEventListener("mouseenter", onMouseUpdate, false);
     };
 
-    preparedGun(dictionary) {
 
+
+    observeOnclick() {
         document.onclick = (ev) => {
 
             if(this.bullets > 0){
                 let key = ev.target.tag;
 
-                if(key !== undefined){
-                   dictionary[key].didDamage();
-                }
+                if(this.arm !== undefined && key !== undefined){
+                    this.arm.getDictionary()[key].didDamage();
 
-                if(key === "fantom"){
-                    let newValue = this.health === 0 ? 0 : this.health - 10;
-                    this.changeHealthValue(newValue);
+                    if(key === "fantom"){
+                        let newValue = this.health === 0 ? 0 : this.health - 10;
+                        this.changeHealthValue(newValue);
+                    }
                 }
-
 
                 AudioHelper.getInstance().playShot();
                 this.bullets -= 1
@@ -59,23 +55,27 @@ class Engine extends BaseDamagable {
         };
     }
 
-    changeHealthValue(value){
-         this.health = value < 0 ? 0 : value > 100 ? 100 : value;
-         this.healthTable.setHealthValue(this.health);
 
-         if(this.health < 1){this.sendEventDie();}
-    }
 
-    preparedReloadGun(){
+    observeKeypress(){
 
         document.onkeypress = (ev) => {
 
                 if (ev.code === "KeyR" && this.isLoading === false) {
                     this.isLoading = true;
-                    this.gunDisappearAnimation(this.div.clientWidth * 2, this.div,this.bullets);
+
+                    if(this.arm !== undefined){
+                        this.arm.gunDisappearAnimation(this.arm.div.clientWidth * 2, this.arm.div, this.bullets);
+                    }
+
+
                     setTimeout(()=> {
                         this.bullets = 6;
-                        this.gunAppearAnimation(this.div.clientWidth, this.div, this.isLoading);
+
+                        if(this.arm !== undefined) {
+                            this.arm.gunAppearAnimation(this.arm.div.clientWidth, this.arm.div, this.isLoading);
+                        }
+
                         this.isLoading = false;
                     }, 2000);
                 }else if(ev.code === "Enter"){
@@ -87,50 +87,24 @@ class Engine extends BaseDamagable {
         }
     }
 
-   gunDisappearAnimation(size,div,bullets){
-
-        if(bullets < 1){
-
-                let currentSize = 0;
-
-                let id = setInterval(function () {
-                    if(currentSize > -size){
-                        currentSize -= 5;
-                        div.style.bottom = currentSize + "px";
-                    }else {
-                        AudioHelper.getInstance().playReload();
-                        clearInterval(id);
-                    }
-                }, 5);
-        }
-    }
-
-    gunAppearAnimation(size,div){
-
-            let currentSize = -size;
-
-            let id = setInterval(function () {
-                if(currentSize < 0){
-                    currentSize += 5;
-                    div.style.bottom =  currentSize - 20 + "px";
-                }else {
-                    clearInterval(id);
-                }
-            }, 5);
-
-    }
-
     didDamage() {
         let newValue = this.health === 0 ? 0 : this.health - 10;
         this.changeHealthValue(newValue);
     }
 
-    sendEventDie(){
+    changeHealthValue(value){
+        this.health = value < 0 ? 0 : value > 100 ? 100 : value;
 
+        if( this.healthTable !== undefined){
+            this.healthTable.setHealthValue(this.health);
+        }
+
+        if(this.health < 1){this.sendEventDie();}
+    }
+
+    sendEventDie(){
         let myEvent = new CustomEvent("dieGamer", {
-            detail: {
-                tag: this.div.tag
-            }
+            detail: {}
         });
         document.dispatchEvent(myEvent);
     }

@@ -46,6 +46,9 @@ class BaseDamagable extends BaseDecoration{
         this.dictionary = dictionary;
     }
 
+    getDictionary(){
+        return this.dictionary
+    }
 
     didDamage(){
         throw new Error("ChildDamage should overwrite 'didDamage' ");
@@ -132,9 +135,9 @@ class BaseEnemy extends BaseDamagable{
 
                 if(this.bullets > 0 && !this.isFinishedGame()){
                     AudioHelper.getInstance().playShotEnemy();
-                    let engine = this.dictionary["gun"];
+                    let arm = this.dictionary["gun"];
 
-                    let divLeftPosition = engine.div.style.left;
+                    let divLeftPosition = arm.div.style.left;
                     let startX = Number(divLeftPosition.substring(0, divLeftPosition.length - 2));
                     let endX = startX + this.div.clientWidth;
 
@@ -144,7 +147,7 @@ class BaseEnemy extends BaseDamagable{
                     let shootCoord = getRandValue(minRand, maxRand );
 
                     if(shootCoord >= startX && shootCoord <= startX + this.div.clientWidth){
-                        engine.didDamage();
+                        this.sendEventDamageGamer();
                     }
 
                     this.bullets -= 1;
@@ -157,6 +160,13 @@ class BaseEnemy extends BaseDamagable{
                     shootingCount -=1;
                 }
             }, 1500);
+    }
+
+    sendEventDamageGamer(){
+        let myEvent = new CustomEvent("gamerWasDamaged", {
+            detail: {}
+        });
+        document.dispatchEvent(myEvent);
     }
 
     makeReload(){
