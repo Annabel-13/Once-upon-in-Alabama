@@ -6,8 +6,8 @@ class Fantom extends BaseDamagable{
     health = 100;
     image = ["url('images/bird.png')", "url('images/bat.png')"];
 
-    constructor(mainDiv, dictionary,tag,){
-        super(mainDiv, dictionary,tag);
+    constructor(mainDiv, dictionary){
+        super(mainDiv, dictionary,"fantom");
         this.div.style.backgroundImage = this.image[0];
     }
 

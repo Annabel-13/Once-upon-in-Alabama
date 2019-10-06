@@ -7,6 +7,12 @@ class Engine {
     healthTable;
     arm;
 
+    constructor(){
+        this.observeMouseOver();
+        this.observeOnclick();
+        this.observeKeypress();
+        this.observeGamerWasDamaged();
+    }
 
     setArmDiv(div){
         this.arm = div;
@@ -79,12 +85,14 @@ class Engine {
                         this.isLoading = false;
                     }, 2000);
                 }else if(ev.code === "Enter"){
-                    let myEvent = new CustomEvent("startGame", {
-                        detail: {}
-                    });
+                    let myEvent = new CustomEvent("startGame", {detail: {}});
                     document.dispatchEvent(myEvent);
                 }
         }
+    }
+
+    observeGamerWasDamaged(){
+        document.addEventListener("gamerWasDamaged", () => {this.didDamage()});
     }
 
     didDamage() {
@@ -99,14 +107,10 @@ class Engine {
             this.healthTable.setHealthValue(this.health);
         }
 
-        if(this.health < 1){this.sendEventDie();}
-    }
-
-    sendEventDie(){
-        let myEvent = new CustomEvent("dieGamer", {
-            detail: {}
-        });
-        document.dispatchEvent(myEvent);
+        if(this.health < 1){
+            let myEvent = new CustomEvent("dieGamer", {detail: {}});
+            document.dispatchEvent(myEvent);
+        }
     }
 }
 

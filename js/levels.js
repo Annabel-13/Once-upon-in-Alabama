@@ -15,20 +15,19 @@ class LevelMonday {
     }
 
     createFantom(){
-        let fantom = new Fantom(this.mainDiv, this.dictionary, "fantom");
+        let fantom = new Fantom(this.mainDiv, this.dictionary);
             fantom.setMargins("50px", "50px")
     }
 
     createGameScore(){
         let score = new GameScore(this.mainDiv, "Test text");
             score.setMargins();
-            return score;
+        return score;
     }
 
 
 
     getEnemies(){
-
         return [
              new DrunkJoy(this.mainDiv,this.dictionary,"drunker1"),
              new DrunkBill(this.mainDiv,this.dictionary,"drunker2"),
@@ -63,28 +62,6 @@ class LevelMonday {
     }
 }
 
-/*
-class BaseLevel {
-
-    dictionary = {};
-    panoramaBackgroundColor;
-    panoramaImage;
-    groundImage;
-    fantomImage;
-    gunImage;
-
-
-    // createMainDiv(){}
-    // createFantom(){}
-    // createScore(){}
-    // createDecorations(){}
-    // createEnemies(){}
-    // createEngine(){}
-    // appendListeners(){}
-    // startLevel(){}
-    // clearLevel(){}
-}
-*/
 
 
 
