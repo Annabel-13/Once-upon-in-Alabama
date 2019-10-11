@@ -8,6 +8,17 @@
     background-repeat: no-repeat;
 }
 
+.car{
+    width: 500px;
+    height:  500px;
+    display: inline-block;
+    position: fixed;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
 .cactus{
     width: 200px;
     height: 300px;
