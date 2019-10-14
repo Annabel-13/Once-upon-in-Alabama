@@ -39,15 +39,15 @@ class Car extends BaseDamagable{
         this.div.style.backgroundImage = this.image[0];
     }
 
-    setMargins(topMargin, rightMargin){
-        this.div.style.top = topMargin;
-        this.div.style.right = rightMargin;
+    setMargins(topMargin,rightMargin){
+        this.div.style.bottom = topMargin;
+        this.div.style.left = rightMargin;
     }
 
 
     createChildDiv(){
         let car = document.createElement("div");
-        car.classList.add("fantom");
+        car.classList.add("car");
         return car;
     }
 

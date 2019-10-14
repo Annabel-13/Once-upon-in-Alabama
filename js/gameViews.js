@@ -59,9 +59,11 @@ class Panorama {
     panoramaBackgroundColor;
     panoramaBackgroundImage;
     groundColor;
+    groundOpacity;
 
-    constructor(panoramaBackgroundColor, panoramaBackgroundImage, groundColor){
+    constructor(panoramaBackgroundColor, panoramaBackgroundImage, groundColor,groundOpacity){
         this.groundColor = groundColor;
+        this.groundOpacity = groundOpacity;
         this.panoramaBackgroundImage = panoramaBackgroundImage;
         this.panoramaBackgroundColor = panoramaBackgroundColor;
     }
