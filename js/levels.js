@@ -93,7 +93,7 @@ class LevelTuesday {
 
     getEnemies(){
         return [
-            new DrunkJoy(this.mainDiv,this.dictionary,"drunker1"),
+            new Policeman1(this.mainDiv,this.dictionary,"drunker1"),
             new DrunkBill(this.mainDiv,this.dictionary,"drunker2"),
             new DrunkPhill(this.mainDiv,this.dictionary,"drunker3")
         ];
@@ -110,7 +110,7 @@ class LevelTuesday {
             let marginBottom = getRandValue(offset, maxValue - (2 * offset));
             let marginLeft = getRandValue(0, window.innerWidth - size);
 
-            let cactus = new Cactus(this.mainDiv, this.dictionary, "cactus"+ i);
+            let cactus = new Cactus2(this.mainDiv, this.dictionary, "cactus"+ i);
             cactus.setMargins(marginLeft + "px", marginBottom + "px");
         }
     }

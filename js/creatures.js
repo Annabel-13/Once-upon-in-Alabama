@@ -109,3 +109,36 @@ class DrunkPhill extends BaseEnemy{
     }
 
 }
+
+class Policeman1 extends BaseEnemy{
+
+    accuracy = 1000;
+
+    constructor(mainDiv, dictionary,tag) {
+        super(mainDiv, dictionary,tag);
+    }
+
+
+    onReload(){
+        AudioHelper.getInstance().playReload();
+    }
+
+    onDamage(){
+        AudioHelper.getInstance().playDamageEnemy();
+    }
+
+
+    onDie(){
+        this.div.style.backgroundImage = "url('images/graveStone.png')";
+        AudioHelper.getInstance().playDie();
+    }
+
+    lookRunning(){
+        this.div.style.backgroundImage = "url('images/policeman1.png')";
+    }
+
+    lookWaiting(){
+        this.div.style.backgroundImage = "url('images/policeman1.png')";
+    }
+
+}

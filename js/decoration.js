@@ -84,6 +84,33 @@ class Cactus extends BaseDamagable{
 }
 
 
+class Cactus2 extends BaseDamagable{
+
+    image = [ "url('images/cactus2.png')", "url('images/cactusBroken2.png')"];
+
+    constructor(mainDiv, dictionary,tag){
+        super(mainDiv, dictionary,tag);
+        this.div.style.backgroundImage = this.image[0];
+    }
+
+    setMargins(leftMargin, bottomMargin){
+        this.div.style.bottom = bottomMargin;
+        this.div.style.left = leftMargin;
+    }
+
+    createChildDiv(){
+        let cactus = document.createElement('div');
+        cactus.classList.add("cactus");
+        return cactus;
+    }
+
+    didDamage() {
+        this.div.style.backgroundImage = this.image[1];
+    }
+
+}
+
+
 
 
 
