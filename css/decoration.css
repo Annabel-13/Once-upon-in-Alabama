@@ -6,6 +6,7 @@
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
+    z-index: 5;
 }
 
 .cactus{
@@ -16,5 +17,6 @@
     background-size: auto;
     background-position: bottom;
     background-repeat: no-repeat;
+    z-index: 7;
 
 }

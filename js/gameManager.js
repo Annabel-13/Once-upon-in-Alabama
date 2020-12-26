@@ -9,12 +9,12 @@ class GameManager {
     healthTable;
 
     constructor(level){
+        this.arm = level.createArm();
         this.mainDiv = level.getMainDiv();
-        this.scoreTable = level.createGameScore();
         this.enemies = level.getEnemies();
         this.enemiesCount = this.enemies.length;
-        this.arm = level.createArm();
         this.healthTable = level.createHealthTable();
+        this.scoreTable = level.createGameScore();
 
         level.createFantom();
         level.createDecoration();

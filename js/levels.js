@@ -19,10 +19,10 @@ class LevelMonday {
             fantom.setMargins("50px", "50px")
     }
 
-    createGameScore(){
-        let score = new GameScore(this.mainDiv, "Test text");
-            score.setMargins();
-        return score;
+    createArm(){
+        let arm = new Arm(this.mainDiv, this.dictionary,"gun");
+        arm.setMargins(window.innerWidth);
+        return arm;
     }
 
 
@@ -51,15 +51,19 @@ class LevelMonday {
             }
     }
 
-    createArm(){
-        let arm = new Arm(this.mainDiv, this.dictionary,"gun");
-            arm.setMargins(window.innerWidth);
-        return arm;
-    }
+
 
     createHealthTable(){
         return new HealthScore(this.mainDiv);
     }
+
+    createGameScore(){
+        let score = new GameScore(this.mainDiv, "Test text");
+        score.setMargins();
+        return score;
+    }
+
+
 }
 
 

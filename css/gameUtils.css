@@ -4,6 +4,7 @@
     background-color: #8b4a46;
     bottom: 0;
     position: fixed;
+    z-index: 8;
 }
 
 
@@ -33,6 +34,7 @@
     width: 400px;
     height: 200px;
     opacity: 0;
+    z-index: 10;
 }
 
 .healthScore-contentDiv{
@@ -45,6 +47,7 @@
     border-radius: 33px;
     font-size: 25px;
     line-height: 50px;
+    z-index: 9;
 }
 
 .healthScore-textDiv{
@@ -54,6 +57,7 @@
     position: fixed;
     font-size: 25px;
     border-radius: 33px;
+    z-index: 9;
 }
 
 .healthScore{
@@ -68,4 +72,5 @@
     text-align: center;
     font-family: URW Chancery L, cursive;
     border-radius: 33px;
+    z-index: 9;
 }
