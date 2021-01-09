@@ -2,7 +2,7 @@
 
 class LevelMonday {
 
-    panorama =  new Panorama("#0ba754", "url('images/desert.png')", "#000");
+    panorama =  new Panorama("#0ba754", "url('images/desert.png')", '#8b4a46' );
     mainDiv;
     dictionary = {};
 
