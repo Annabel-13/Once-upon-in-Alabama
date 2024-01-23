@@ -13,6 +13,3 @@ In a addition, you see your health score in a right corner. When the score falls
 ![alt text](https://github.com/Annabel-13/Once-upon-in-Alabama/blob/dev/Screenshot_3.png)
 If you kill all your enemies, you are a winner!
 
-# License
-
-http://www.apache.org/licenses/LICENSE-2.0
